@@ -31,7 +31,9 @@ const profileStore = createSlice({
     remember: false,
   } as unknown as IStore,
   reducers: {
-    fetchProfile: (
+    //Cac ACtion
+    fetchProfile: ( //Tao ra 1 action co Payload la "profileStore/fetchProfile"
+      //Mutation | Redux co cai san thu vien Immer 
       state,
       action: PayloadAction<{ user?: UserEntity; listPermissionCode?: string[] }>,
     ) =>
@@ -65,6 +67,7 @@ const profileStore = createSlice({
   extraReducers: builder => {
     builder
       .addCase(removeProfile, (state: any) => {
+        // return ve cho state hien tai
         return {
           ...state,
           statusLogin: false,
@@ -75,6 +78,7 @@ const profileStore = createSlice({
         };
       })
       .addCase(setToken, (state, action) =>
+        // return ve cho state hien tai
         Object.assign(state, action.payload, {
           statusLogin: !lodash.isEmpty(action.payload.token),
         }),

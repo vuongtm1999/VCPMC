@@ -25,6 +25,7 @@ export class AccountPermissionEntity {
     });
   }
 }
+
 class UserEntity {
   userName = '';
 

@@ -22,12 +22,16 @@ import { useAltaIntl } from '@shared/hook/useTranslate';
 import ModalComponents from './component/MainModal/ModalHomepage';
 import { IModal } from './interface';
 import { routerHomepage } from './router';
+import { signOut } from 'firebase/auth';
+import FirebaseConfig from 'src/firebase/FirebaseConfig';
+import { useNavigate } from 'react-router';
 
 const dataTable = require('./data.json');
 
 const Homepage = () => {
   const { formatMessage } = useAltaIntl();
   const table = useTable();
+  const navigate = useNavigate();
 
   const [modal, setModal] = useState<IModal>({
     isVisible: false,
@@ -128,11 +132,19 @@ const Homepage = () => {
       setFilterOption((pre: any) => ({ ...pre, [name]: status }));
     }
   };
+
+  const handleLogout = () => {
+    signOut(FirebaseConfig.auth);
+    // removeToken xong r moi navigate
+    navigate('/login');
+  };
+
   return (
     <div className="homepage">
       <MainTitleComponent breadcrumbs={routerHomepage} />
       <div className="main-card">
         <div className="d-flex flex-row justify-content-md-between mb-3 align-items-end">
+          <button onClick={handleLogout}>Logout</button>
           <div className="d-flex flex-row ">
             {arraySelectFilter.map(item => (
               <SelectAndLabelComponent

@@ -1,8 +1,8 @@
 import React, { PropsWithChildren } from 'react';
-import { logo } from '@shared/assets/images';
+import { logoVCPMC } from '@shared/assets/images';
 import ChangeLanguage from '@shared/components/ChangeLanguage';
 
-const AuthLayout: React.FC<PropsWithChildren<any>> = props => {
+const AuthLayout: React.FC<PropsWithChildren<any>> = ({ children }) => {
   return (
     <div className="auth-page">
       <div className="language__box">
@@ -10,9 +10,9 @@ const AuthLayout: React.FC<PropsWithChildren<any>> = props => {
       </div>
       <div className="main__box">
         <div className="logo__box">
-          <img src={logo} alt="logo" />
+          <img src={logoVCPMC} alt="logo" />
         </div>
-        {props.children}
+        {children}
       </div>
     </div>
   );
