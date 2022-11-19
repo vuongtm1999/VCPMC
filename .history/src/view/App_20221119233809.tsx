@@ -39,6 +39,8 @@ const App: React.FC = () => {
   const history = useNavigate();
   const location = useLocation();
 
+  console.log('My location', location.pathname);
+
   const memoLangData = useMemo(() => {
     return locale[language];
   }, [language]);

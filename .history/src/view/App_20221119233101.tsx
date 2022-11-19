@@ -39,11 +39,13 @@ const App: React.FC = () => {
   const history = useNavigate();
   const location = useLocation();
 
+  console.log(location);
+
   const memoLangData = useMemo(() => {
     return locale[language];
   }, [language]);
   useEffect(() => {
-    if (!token && !location.pathname.includes('/reset-password')) {
+    if (!token) {
       history('/login');
     }
   }, [token]);
