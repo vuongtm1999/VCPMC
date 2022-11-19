@@ -30,13 +30,11 @@ const ForgotPassword = () => {
         // Password reset email sent!
         // ..
         console.log('Password reset email sent!');
-        setCheckSuccessEmail(true);
-        setErrorStatus(formatMessage('forgot.password.email.not.exit'));
       })
       .catch(error => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log('Erorr:', errorCode, errorMessage);
+        console.log("Erorr:", errorCode, errorMessage);
         // ..
       });
     // forgotPasswordCall

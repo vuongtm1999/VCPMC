@@ -25,6 +25,7 @@ import { IModal } from './interface';
 import { routerHomepage } from './router';
 import { signOut } from 'firebase/auth';
 import FirebaseConfig from 'src/firebase/FirebaseConfig';
+import { useNavigate } from 'react-router';
 import profileStore from '@modules/authentication/profileStore';
 
 const dataTable = require('./data.json');

@@ -9,8 +9,6 @@ import { useAltaIntl } from '@shared/hook/useTranslate';
 import NavLinkBottom from '../components/NavLinkBottom';
 import RenderError from '../components/RenderError';
 import AuthLayout from '../components/AuthLayout';
-import FirebaseConfig from 'src/firebase/FirebaseConfig';
-import { sendPasswordResetEmail } from 'firebase/auth';
 
 const ForgotPassword = () => {
   const history = useNavigate();
@@ -24,19 +22,15 @@ const ForgotPassword = () => {
     setErrorStatus('');
   };
 
-  const onSubmitEmail = (values: any) => {
-    sendPasswordResetEmail(FirebaseConfig.auth, values.email)
+  const onSubmitEmail = async (values: any) => {
+    sendPasswordResetEmail(auth, values.email)
       .then(() => {
         // Password reset email sent!
         // ..
-        console.log('Password reset email sent!');
-        setCheckSuccessEmail(true);
-        setErrorStatus(formatMessage('forgot.password.email.not.exit'));
       })
       .catch(error => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log('Erorr:', errorCode, errorMessage);
         // ..
       });
     // forgotPasswordCall
