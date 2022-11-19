@@ -1,5 +1,3 @@
-
-
 import { Button, Checkbox, Form, Input } from 'antd';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
@@ -71,17 +69,19 @@ const MyLogin = () => {
             >
               <Input.Password placeholder={formatMessage('auth.password')} />
             </Form.Item>
+            
+            {errorStatus && <RenderError errorStatus={errorStatus} />}
+
             <Form.Item name="remember" valuePropName="checked" className="remember__login">
               <Checkbox>{formatMessage('login.remember')}</Checkbox>
             </Form.Item>
 
-            {errorStatus && <RenderError errorStatus={errorStatus} />}
             <Button htmlType="submit" className="normal-button">
               {formatMessage('login.button.account')}
             </Button>
           </Form>
 
-          <div className='forget_Pass'>{formatMessage('forgot.password.title')}</div>
+          <div className="forget_Pass">{formatMessage('forgot.password.title')}</div>
         </div>
       </div>
     </>
