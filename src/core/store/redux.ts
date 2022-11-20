@@ -8,7 +8,7 @@ import storage from 'redux-persist/lib/storage';
 import CONFIG from '@config/index';
 import appReducer, { RootState } from '@modules/index';
 
-const profile = createWhitelistFilter('profile', ['token', 'UID', 'remember']);
+const profile = createWhitelistFilter('profile', ['token', 'uID', 'remember']);
 const settingStore = createWhitelistFilter('settingStore', ['language']);
 const persistConfig: PersistConfig<RootState> = {
   key: CONFIG.APP_NAME,

@@ -15,9 +15,7 @@ import { UIDSelector } from '@core/store/redux';
 const PrivatePage: React.FC = () => {
   const { token } = useSelector(TokenSelector);
   const dispatch = useDispatch();
-  const uID = useSelector(UIDSelector);
-
-  console.log(uID);
+  const { uID } = useSelector(UIDSelector);
 
   useEffect(() => {
     if (token) {

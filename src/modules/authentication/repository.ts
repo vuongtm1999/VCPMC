@@ -85,7 +85,7 @@ const resetPass = (payload: any, otp: string) => {
   });
 };
 
-const getProfile = async (docId) => {
+const getProfile = async (uID) => {
   // const item = localStorage.getItem('persist:CMS-Company_name');
 
   // if (item) {
@@ -94,15 +94,13 @@ const getProfile = async (docId) => {
   //   console.log('MyTest', profile);
   // }
 
-  console.log(docId);
-
   // DocID = UID
-  const userDoc = doc(FirebaseConfig.fbDB, 'Users', docId as string);
+  const userDoc = doc(FirebaseConfig.fbDB, 'Users', uID);
 
   const myDoc = await getDoc(userDoc);
 
   // return info 
-  return myDoc;
+  return myDoc.data();
 
   // return httpRepository.execute({
   //   path: '/api/Users/Profile',

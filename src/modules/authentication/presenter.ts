@@ -17,14 +17,15 @@ authenticationPresenter.login = async (payload: ILoginDTO, remember = false) => 
   return token;
 };
 
-authenticationPresenter.getProfile = (docID):any => {
+authenticationPresenter.getProfile = (uID):any => {
 
-  authenticationRepository.getProfile(docID)
-    .then((data) => data.data())
+  authenticationRepository.getProfile(uID)
     .then((user) => {
       // // 'UserEntity': userName, userFullName, id, createdAt, updateAt
       store.dispatch(profileStore.actions.fetchProfile({ user }));
       return Promise.resolve(user);
+    }).catch((error) =>{
+      console.log(error);
     });
 
 

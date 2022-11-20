@@ -1,9 +1,7 @@
-import { doc, getDoc } from 'firebase/firestore';
-import { createAction, createAsyncThunk, createSlice, PayloadAction, Selector } from '@reduxjs/toolkit';
+import { createAction, createSlice, PayloadAction, Selector } from '@reduxjs/toolkit';
 import lodash from 'lodash';
 import { RootState } from '@modules';
 import UserEntity from '@modules/user/entity';
-import FirebaseConfig from 'src/firebase/FirebaseConfig';
 
 interface IStore {
   statusLogin?: boolean;
@@ -15,20 +13,20 @@ export const setToken = createAction<{ token: any; uID: any; remember: boolean }
 export const setUID = createAction<{ uID: any; }>('authentication/setUID');
 
 //My action
-export const getUserProfile = createAsyncThunk(
-  'authentication/getUserProfile',
-  async () => {
-    //DocID in firestore = UID in
-    const docId = await FirebaseConfig.auth.currentUser?.uid;
+// export const getUserProfile = createAsyncThunk(
+//   'authentication/getUserProfile',
+//   async () => {
+//     //DocID in firestore = UID in
+//     const docId = await FirebaseConfig.auth.currentUser?.uid;
 
-    console.log(docId);
-    // DocID = UID
-    const userDoc = doc(FirebaseConfig.fbDB, 'Users', docId as string);
-    const myDoc = await getDoc(userDoc);
-    // return info 
-    return myDoc;
-  },
-);
+//     console.log(docId);
+//     // DocID = UID
+//     const userDoc = doc(FirebaseConfig.fbDB, 'Users', docId as string);
+//     const myDoc = await getDoc(userDoc);
+//     // return info 
+//     return myDoc;
+//   },
+// );
 
 
 interface IStore {
@@ -104,10 +102,10 @@ const profileStore = createSlice({
         Object.assign(state, action.payload, {
           statusLogin: !lodash.isEmpty(action.payload.token),
         }),
-      )
-      .addCase(getUserProfile.fulfilled.toString(), (state, action) =>
-        Object.assign(state, action),
       );
+    // .addCase(getUserProfile.fulfilled.toString(), (state, action) =>
+    //   Object.assign(state, action),
+    // );
   },
 });
 
