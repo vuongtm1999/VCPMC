@@ -7,7 +7,7 @@ import { routerHomepage } from '@view/Homepage/router';
 import { IRouter } from './interface';
 
 export const privatePage: IRouter[] 
-= [routerHomepage, routerViewProfile];
+= [routerViewProfile, routerHomepage];
 
 export const publicPage: IRouter[] 
 = [routerLogin, routerForgotPassword, routerResetPassword];
