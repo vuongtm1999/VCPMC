@@ -260,10 +260,7 @@ const TableComponent: React.FC<IBEPaginationTable> = <T extends object>(
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [handleClickOnRow]);
 
-  const searchLable = intl.formatMessage({
-    id: 'common.keyword',
-    defaultMessage: 'common.keyword',
-  });
+  const searchLable = formatMessage('common.statusActive');
 
   return (
     <div className={`card-main-table ${props?.className}`}>

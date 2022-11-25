@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from 'react-router';
 import { UilAngleRight } from '@iconscout/react-unicons';
 import { IRouter } from '@routers/interface';
 import { privatePage } from '@routers/mainRouter';
-import { logo } from '@shared/assets/images';
+import { logoVCPMC } from '@shared/assets/images';
 import CheckPermission from '@shared/hoc/CheckPermission';
 
 import MenuItem from './ItemMenu';
@@ -66,7 +66,7 @@ const SiderComponent: React.FC<{
       </div>
       <div className="mask" style={{ width }}>
         <div className="logo">
-          <img src={logo} alt="logo" onClick={() => navigate('/')} />
+          <img src={logoVCPMC} alt="logo" onClick={() => navigate('/')} />
         </div>
         <div className="menu">
           <RenderMenu listNav={privatePage} location={location.pathname} />

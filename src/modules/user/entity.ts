@@ -33,6 +33,8 @@ class UserEntity {
 
   email = '';
 
+  birthDay = '';
+
   // permissions: AccountPermissionEntity[] = [];
 
   id = '';

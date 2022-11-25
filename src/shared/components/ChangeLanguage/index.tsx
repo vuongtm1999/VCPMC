@@ -6,8 +6,6 @@ import { useSelector } from 'react-redux';
 import { LANGUAGE } from '@config/index';
 import { Select } from 'antd';
 import { RootState } from '@modules';
-import StarIcon from '@assets/icon/VieFlatIcon';
-import { Option } from 'antd/lib/mentions';
 
 interface IChangeLanguage {
   language: string;
@@ -31,8 +29,7 @@ const ChangeLanguage: any = () => {
         {LANGUAGE.map((item, index) => {
           return (
             <Select.Option key={index + 'option'} value={item.value}>
-              <span className="mr-2">{item.label}</span>
-              <StarIcon />
+              <span>{item.label} <span className='mb-2'>{ item.icon ? <item.icon/> : 'icon' }</span></span>
             </Select.Option>
           );
         })}

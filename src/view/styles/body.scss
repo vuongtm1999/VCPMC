@@ -4,43 +4,43 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
 @font-face {
-  font-family: 'Mali';
+  font-family: 'Montserrat';
   font-weight: normal;
   font-display: swap;
-  src: local('Mali Regular'), local('Mali-Regular'),
-    url('../../shared/assets/font/Mali/Mali-Regular.ttf') format('truetype');
+  src: local('Montserrat Regular'), local('Montserrat-Regular'),
+  url('../../shared/assets/font/Montserrat/Montserrat-Regular.ttf') format('truetype');
 }
 
 @font-face {
-  font-family: 'Mali';
+  font-family: 'Montserrat';
   font-weight: 600;
   font-display: swap;
-  src: local('Mali Semi Bold'), local('Mali-Semi-Bold'),
-    url('../../shared/assets/font/Mali/Mali-SemiBold.ttf') format('truetype');
+  src: local('Montserrat Semi Bold'), local('Montserrat-Semi-Bold'),
+    url('../../shared/assets/font/Montserrat/Montserrat-SemiBold.ttf') format('truetype');
 }
 
 @font-face {
-  font-family: 'Mali';
+  font-family: 'Montserrat';
   font-weight: bold;
   font-display: swap;
-  src: local('Mali Bold'), local('Mali-Bold'),
-    url('../../shared/assets/font/Mali/Mali-Bold.ttf') format('truetype');
+  src: local('Montserrat Bold'), local('Montserrat-Bold'),
+    url('../../shared/assets/font/Montserrat/Montserrat-Bold.ttf') format('truetype');
 }
 
 @font-face {
-  font-family: 'Mali';
+  font-family: 'Montserrat';
   font-weight: 500;
   font-display: swap;
-  src: local('Mali Medium'), local('Mali-Medium'),
-    url('../../shared/assets/font/Mali/Mali-Medium.ttf') format('truetype');
+  src: local('Montserrat Medium'), local('Montserrat-Medium'),
+    url('../../shared/assets/font/Montserrat/Montserrat-Medium.ttf') format('truetype');
 }
 
 @font-face {
-  font-family: 'Mali';
+  font-family: 'Montserrat';
   font-weight: 300;
   font-display: swap;
-  src: local('Mali Light'), local('Mali-Light'),
-    url('../../shared/assets/font/Mali/Mali-Light.ttf') format('truetype');
+  src: local('Montserrat Light'), local('Montserrat-Light'),
+    url('../../shared/assets/font/Montserrat/Montserrat-Light.ttf') format('truetype');
 }
 
 @font-face {
@@ -53,18 +53,23 @@
 
 html {
   font-size: 10px;
+
   @include respond('xs-screen') {
     font-size: 3px;
   }
+
   @include respond('sm-screen') {
     font-size: 5px;
   }
+
   @include respond('md-screen') {
     font-size: 7px;
   }
+
   @include respond('xl-screen') {
     font-size: 9px;
   }
+
   @include respond('xxl-screen') {
     font-size: 10px;
   }
@@ -101,18 +106,23 @@ a:hover {
 .margin-select {
   margin-right: 1vw;
 }
+
 .w-20 {
   width: 20% !important;
 }
+
 .w-80 {
   width: 80% !important;
 }
+
 .no-padding {
   padding: 0rem !important;
 }
+
 .ant-row {
   row-gap: 1rem !important;
 }
+
 .pointer {
   cursor: pointer;
 }

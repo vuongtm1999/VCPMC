@@ -11,6 +11,31 @@
     border-radius: 6px;
     padding: 0.9rem 1.6rem;
     width: 100%;
+    background-color: $color-background-dark;
+    color: white !important;
+    box-shadow: unset;
+
+    .ant-picker-suffix {
+      color: $color-primary;
+    }
+  }
+
+  .ant-picker.ant-picker-disabled .ant-picker-suffix {
+    display: none;
+  }
+
+  .ant-picker-input > input {
+    color: unset;
+  }
+
+  .ant-picker-disabled {
+    border: unset;
+    color: $color-form-text-disabled !important;
+  }
+
+  .ant-picker:hover,
+  .ant-picker-focused {
+    border-color: $color-input-border;
   }
 
   .ant-form-item-explain {
@@ -88,7 +113,8 @@
     font-size: $fs-1;
     border-radius: 6px;
     padding: 0.9rem 1.6rem;
-    color: $color-ant-input !important;
+    color: $color-white !important;
+    background-color: $color-background-dark !important;
   }
 
   .ant-input:focus,
@@ -105,7 +131,7 @@
   }
 
   .ant-form-item-label > label {
-    color: $color-primary;
+    color: $color-white;
     font-weight: $font-weight-bold;
     font-size: $fs-2;
   }
@@ -123,7 +149,10 @@
 
   .ant-input-disabled {
     background: $color-input-disabled;
+    border-color: $color-background-light;
+    color: $color-form-text-disabled !important;
   }
+
 
   .reCaptcha__box {
     display: flex;

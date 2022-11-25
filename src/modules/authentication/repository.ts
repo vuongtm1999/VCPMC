@@ -1,9 +1,9 @@
 import { fbRepositories } from './../../core/repository/AuthenticationRepositoriesImpl';
 import httpRepository from '@core/repository/http';
-import User from '@modules/user/entity';
-import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { signInWithEmailAndPassword, signOut, updatePassword } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import FirebaseConfig from 'src/firebase/FirebaseConfig';
+import * as types from '@firebase/auth-types';
 
 const register = (payload: any) => {
   return httpRepository.execute({
@@ -33,7 +33,8 @@ const CheckRecoveryToken = (payload: any) => {
   });
 };
 
-const updatePassword = (payload: any) => {
+//Reset password
+const updatePasswordd = (payload: any) => {
   return httpRepository.execute({
     path: '/api/Users/ChangePassword',
     method: 'put',
@@ -111,16 +112,21 @@ const getProfile = async (uID) => {
   // });
 };
 
-const updateProfile = (payload: any) => {
-  return httpRepository.execute({
-    path: '/api/Users/Profile',
-    method: 'put',
-    showSuccess: false,
-    payload,
-    convert: res => {
-      return new User(res);
-    },
+const updateProfile = (newPassword: any) => {
+  const user = FirebaseConfig.auth.currentUser;
+
+  return fbRepositories.excute({
+    asyncFunction: updatePassword(user as types.User, newPassword),
   });
+  // return httpRepository.execute({
+  //   path: '/api/Users/Profile',
+  //   method: 'put',
+  //   showSuccess: false,
+  //   payload,
+  //   convert: res => {
+  //     return new User(res);
+  //   },
+  // });
 };
 
 const uploadAvatar = (payload: any) => {
@@ -147,7 +153,7 @@ export default {
   resetPass,
   forgotPass,
   CheckRecoveryToken,
-  updatePassword,
+  updatePasswordd,
   getProfile,
   uploadAvatar,
   updateProfile,

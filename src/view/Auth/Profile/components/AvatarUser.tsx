@@ -13,6 +13,8 @@ const AvatarUser: React.FC<IAvatar> = props => {
   const [imgUrl, setImgUrl] = useState<any>(null);
   const { user } = useSelector(UserSelector);
 
+  // console.log(user);
+
   useEffect(() => {
     if (disabled) {
       setImgUrl(user?.avatar);

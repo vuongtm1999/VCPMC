@@ -54,10 +54,11 @@ const SearchComponent = (props: IProps) => {
         type="text"
         onChange={onChange}
         onKeyDown={onClickKeyDown}
-        placeholder={intl.formatMessage({
-          id: props.placeholder,
-          defaultMessage: props.placeholder,
-        })}
+        placeholder={'SearchComponent'}
+        // placeholder={intl.formatMessage({
+        //   id: props.placeholder,
+        //   defaultMessage: props.placeholder,
+        // })}
         suffix={<Icon.Search />}
       />
       {/* <a className="icon-search" onClick={() => props.onClick(valueInput)}>

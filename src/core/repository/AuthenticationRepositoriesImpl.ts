@@ -6,14 +6,14 @@ function AuthenticationRepositoriesImpl() {
   const auth = FirebaseConfig.auth;
 
   interface IParamsFirebaseAuth {
-    asyncFunction: (...params: any[]) => Promise<any>,
+    asyncFunction: ((...params: any[]) => Promise<any | void>) | Promise<void>,
     payload?: ILoginDTO,
   }
 
   const excute = (
     {
       asyncFunction = () => {
-        return new Promise<any>((resolve) => {
+        return new Promise<any | void>((resolve) => {
           resolve('No function is passed');
         });
       },

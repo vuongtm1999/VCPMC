@@ -122,7 +122,7 @@ export const TokenSelector: Selector<RootState, IToken> = state => {
 };
 
 interface IUser {
-  user?: UserEntity;
+  user?: any;
   status: boolean;
 }
 

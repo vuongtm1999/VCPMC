@@ -4,8 +4,11 @@ import Modal from 'antd/lib/modal/Modal';
 import React from 'react';
 
 import { useAltaIntl } from '@hook/useTranslate';
-import authenticationPresenter from '@modules/authentication/presenter';
-import { useSingleAsync } from '@shared/hook/useAsync';
+import { updatePassword } from 'firebase/auth';
+import FirebaseConfig from 'src/firebase/FirebaseConfig';
+import * as types from '@firebase/auth-types';
+import { message } from 'antd';
+import CheckIcon from '@assets/icon/Check';
 
 interface IChangePassWord {
   isModalVisible: boolean;
@@ -16,25 +19,45 @@ const ModalChangePassWord = (props: IChangePassWord) => {
   const { isModalVisible, setIsModalVisible } = props;
   const { formatMessage } = useAltaIntl();
   const [form] = useForm();
-  const updateAccounts = useSingleAsync(authenticationPresenter.updateProfile);
+  // const { uID } = useSelector(UIDSelector);
+  // const updateAccounts = useSingleAsync(authenticationPresenter.updateProfile);
 
   const handleOk = () => {
     setIsModalVisible(false);
   };
 
   const handleCancel = () => {
+    message.open({
+      type: 'success',
+      content: 'Đổi mật khẩu thành công!',
+      duration: 0.8,
+      icon: CheckIcon('no'),
+    });
+
     setIsModalVisible(false);
-    form.resetFields();
   };
 
   const onFinish = (values: any) => {
     delete values.confirmPassword;
+
     if (values) {
-      updateAccounts?.execute(values).then(() => {
-        authenticationPresenter.getProfile().then(() => {
-          handleCancel();
+      const user = FirebaseConfig.auth.currentUser;
+
+      updatePassword(user as types.User, values.password)
+        .then(() => {
+          console.log('Update Password successful!');
+        })
+        .catch(error => {
+          console.log('Update Password', error);
         });
-      });
+
+      handleCancel();
+
+      // updateAccounts?.execute(values).then(() => {
+      //   authenticationPresenter.getProfile(uID).then(() => {
+      //     handleCancel();
+      //   });
+      // });
     }
   };
 
@@ -61,6 +84,27 @@ const ModalChangePassWord = (props: IChangePassWord) => {
         onFinish={onFinish}
         requiredMark={false}
       >
+        {/* <Form.Item
+          label={formatMessage('accounts.presentPassword')}
+          name="presentPassword"
+          dependencies={['password']}
+          rules={[
+            {
+              required: true,
+            },
+            ({ getFieldValue }) => ({
+              validator(_, value) {
+                if (!value || getFieldValue('password') === value) {
+                  return Promise.resolve();
+                }
+                return Promise.reject(new Error(formatMessage('password.not.match')));
+              },
+            }),
+          ]}
+        >
+          <Input.Password placeholder={formatMessage('accounts.confirm.newPassword')} />
+        </Form.Item> */}
+
         <Form.Item
           label={formatMessage('accounts.newPassword')}
           name="password"

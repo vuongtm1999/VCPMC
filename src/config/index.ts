@@ -1,9 +1,10 @@
-import StarIcon from '@assets/icon/VieFlatIcon';
+import AmericianFlat from '@assets/icon/AmericianFlat';
+import StarIcon from '@assets/icon/vietFlat';
 import ISelect from '@core/select';
 
-export const LANGUAGE: ISelect<string>[] = [
-  { value: 'vi', label: 'Tiếng Việt' },
-  { value: 'en', label: 'Tiếng Anh' },
+export const LANGUAGE: ISelect[] = [
+  { value: 'vi', label: 'Tiếng Việt', icon: StarIcon },
+  { value: 'en', label: 'Tiếng Anh', icon: AmericianFlat },
 ];
 
 export const allSelect: ISelect = { label: 'common.all', value: undefined };

@@ -7,11 +7,10 @@ import { useNavigate } from 'react-router';
 
 import store from '@core/store/redux';
 import { useSingleAsync } from '@hook/useAsync';
-import HeaderComponent from '@layout/Header';
 import RightMenu, { IArrayAction } from '@layout/RightMenu';
 import { RootState } from '@modules';
 import authenticationPresenter from '@modules/authentication/presenter';
-import profileStore, { removeProfile } from '@modules/authentication/profileStore';
+import profileStore from '@modules/authentication/profileStore';
 import { DeleteConfirm } from '@shared/components/ConfirmDelete';
 import MainTitleComponent from '@shared/components/MainTitleComponent';
 import { useAltaIntl } from '@shared/hook/useTranslate';
@@ -21,6 +20,14 @@ import ModalChangePassWord from './components/ModalChangePassWord';
 import { routerViewProfile } from './router';
 import { signOut } from 'firebase/auth';
 import FirebaseConfig from 'src/firebase/FirebaseConfig';
+import { doc, updateDoc } from 'firebase/firestore';
+import CheckIcon from '@assets/icon/Check';
+import { DatePicker } from 'antd';
+import dayjs from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+import moment from 'moment';
+
+dayjs.extend(customParseFormat);
 
 const UserProfile = () => {
   const history = useNavigate();
@@ -30,6 +37,8 @@ const UserProfile = () => {
   const [isDisableForm, setIsDisableForm] = useState(true);
   const user = useSelector((state: RootState) => state.profile.user);
   const updateAccounts = useSingleAsync(authenticationPresenter.updateProfile);
+
+  console.log(user?.birthDay);
 
   const showModal = () => {
     setIsVisible(true);
@@ -76,24 +85,43 @@ const UserProfile = () => {
   };
 
   const onUpdateProfile = (values: any) => {
+
+    console.log(values);
+
     if (values) {
-      updateAccounts.execute(values).then(() => {
-        authenticationPresenter.getProfile().then(() => {
-          setIsDisableForm(true);
-        });
-      });
+      const userDoc = doc(FirebaseConfig.fbDB, 'Users', 'WoYxUFCBRvSqWkz9lUxCAkvl5352');
+
+      updateDoc(userDoc, {
+        firstName: values.firstName,
+        lastName: values.lastName,
+        birthDay: values.birthDay.format('DD/MM/YYYY'),
+        numberPhone: values.numberPhone,
+      })
+        .then(() => console.log('Successs'))
+        .catch(error => console.log(error));
     }
+
+    setIsDisableForm(true);
+
+    // if (values) {
+    //   updateAccounts.execute(values).then(() => {
+    //     authenticationPresenter.getProfile().then(() => {
+    //       setIsDisableForm(true);
+    //     });
+    //   });
+    // }
   };
 
   return (
     <div>
-      <div className="all-page-component">
+      {/* <div className="all-page-component">
         <div className="w-100 d-flex flex-row-reverse">
           <HeaderComponent />
         </div>
-      </div>
+      </div> */}
       <div className="profile-page">
-        <MainTitleComponent breadcrumbs={routerViewProfile} />
+        <MainTitleComponent title="Thông tin cơ bản" />
+        {/* <MainTitleComponent breadcrumbs={routerViewProfile} /> */}
         <div className="main-component">
           <div className="profile-user__box">
             <Form
@@ -108,15 +136,96 @@ const UserProfile = () => {
               }}
               id="userProfileForm"
             >
-              <Row className="profile-form__box" justify="center">
-                <Col span={4} className="profile-avatar">
+              <Row className="profile-form__box" justify="start">
+                <Col span={6} className="profile-avatar">
                   <AvatarUser disabled={isDisableForm} chooseFile={chooseFile} />
                 </Col>
                 <Col span={12}>
                   <div className="main-form">
+                    <Row justify="space-between">
+                      <Col span={11}>
+                        <Form.Item
+                          label={formatMessage('accounts.firstName')}
+                          name="firstName"
+                          rules={[
+                            {
+                              required: true,
+                            },
+                            {
+                              max: 99,
+                              whitespace: true,
+                            },
+                          ]}
+                        >
+                          <Input
+                            disabled={isDisableForm}
+                            placeholder={formatMessage('accounts.firstName')}
+                            maxLength={100}
+                          />
+                        </Form.Item>
+                      </Col>
+                      <Col span={11}>
+                        <Form.Item
+                          label={formatMessage('accounts.lastName')}
+                          name="lastName"
+                          rules={[
+                            {
+                              required: true,
+                            },
+                            {
+                              max: 99,
+                              whitespace: true,
+                            },
+                          ]}
+                        >
+                          <Input
+                            disabled={isDisableForm}
+                            placeholder={formatMessage('accounts.lastName')}
+                            maxLength={100}
+                          />
+                        </Form.Item>
+                      </Col>
+                    </Row>
+                    <Row justify="space-between">
+                      <Col span={11}>
+                        <Form.Item
+                          label={formatMessage('accounts.birthDay')}
+                          name="birthDay"
+                          rules={[
+                            {
+                              required: true,
+                            },
+                          ]}
+                          valuePropName="moment"
+                        >
+                          <DatePicker showTime disabled={isDisableForm} defaultValue={ user?.birthDay ? moment(user?.birthDay, 'DD/MM/YYYY') : moment() } format="DD/MM/YYYY" />
+                        </Form.Item>
+                      </Col>
+                      <Col span={11}>
+                        <Form.Item
+                          label={formatMessage('accounts.numberPhone')}
+                          name="numberPhone"
+                          rules={[
+                            {
+                              required: true,
+                            },
+                            {
+                              max: 99,
+                              whitespace: true,
+                            },
+                          ]}
+                        >
+                          <Input
+                            disabled={isDisableForm}
+                            placeholder={formatMessage('accounts.numberPhone')}
+                            maxLength={100}
+                          />
+                        </Form.Item>
+                      </Col>
+                    </Row>
                     <Form.Item
-                      label={formatMessage('accounts.userName')}
-                      name="userName"
+                      label={formatMessage('accounts.account')}
+                      name="email"
                       rules={[
                         {
                           required: true,
@@ -129,13 +238,13 @@ const UserProfile = () => {
                     >
                       <Input
                         disabled={true}
-                        placeholder={formatMessage('accounts.userName')}
+                        placeholder={formatMessage('accounts.email')}
                         maxLength={100}
                       />
                     </Form.Item>
                     <Form.Item
-                      label={formatMessage('accounts.accountFullName')}
-                      name="userFullName"
+                      label={formatMessage('accounts.email')}
+                      name="email"
                       rules={[
                         {
                           required: true,
@@ -147,26 +256,26 @@ const UserProfile = () => {
                       ]}
                     >
                       <Input
-                        disabled={isDisableForm}
-                        placeholder={formatMessage('accounts.accountFullName')}
+                        disabled={true}
+                        placeholder={formatMessage('accounts.email')}
                         maxLength={100}
                       />
                     </Form.Item>
-                    <Form.Item
-                      label={formatMessage('accounts.email')}
-                      name="email"
-                      rules={[
-                        {
-                          required: true,
-                          type: 'email',
-                        },
-                      ]}
-                    >
-                      <Input
-                        disabled={isDisableForm}
-                        placeholder={formatMessage('accounts.email')}
-                      />
-                    </Form.Item>
+                    <Row>
+                      <Col span={11}>
+                        <Form.Item
+                          label={formatMessage('accounts.role')}
+                          name="role"
+                          rules={[
+                            {
+                              required: true,
+                            },
+                          ]}
+                        >
+                          <Input disabled={true} placeholder={formatMessage('accounts.role')} />
+                        </Form.Item>
+                      </Col>
+                    </Row>
                   </div>
                 </Col>
               </Row>

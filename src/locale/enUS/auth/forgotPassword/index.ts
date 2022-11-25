@@ -8,4 +8,6 @@ export default {
   'forgot.password.button.accept': 'Confirm',
   'forgot.password.email.not.exit': 'Email does not exist',
   'forgot.password.email.invalid': 'Email is not a valid email!',
+  'forgot.password.link': 'Forgot password?',
+  
 };

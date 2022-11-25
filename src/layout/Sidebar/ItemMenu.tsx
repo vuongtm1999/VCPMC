@@ -37,7 +37,7 @@ const SubItem: React.FC<IMenu> = (props: IMenu) => {
             className={active}
             key={index}
             onClick={() => {
-              history.push(path);
+              history(path);
             }}
           >
             <FormattedMessage id={linkNav.name} defaultMessage={linkNav.name} />

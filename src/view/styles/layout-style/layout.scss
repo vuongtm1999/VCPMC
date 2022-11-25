@@ -106,8 +106,8 @@
 }
 
 .ant-select-item {
-  display: flex;
-  align-items: center;
+  display: flex !important;
+  align-items: center !important;
   font-size: 2rem;
   min-height: 5rem;
   padding: 0.5rem 1.2rem;

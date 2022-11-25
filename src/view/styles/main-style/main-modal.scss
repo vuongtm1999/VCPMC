@@ -1,9 +1,11 @@
 $border-radius: 1.6rem;
 
 .main-modal {
+
   .ant-modal-content,
   .ant-modal-header {
     border-radius: $border-radius;
+    background-color: $color-modal-background;
   }
 
   .ant-modal-body {
@@ -25,7 +27,7 @@ $border-radius: 1.6rem;
     font-weight: $font-weight-bold;
     font-size: $fs-5;
     line-height: 1.5;
-    color: $color-primary;
+    color: $color-modal-text;
   }
 
   .ant-modal-footer {

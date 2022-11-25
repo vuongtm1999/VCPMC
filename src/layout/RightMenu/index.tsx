@@ -68,8 +68,11 @@ const RenderItem = React.memo(({ item }: { item: IArrayAction }) => {
   return (
     <Tooltip placement="left" title={title}>
       <span className={`item__icon ${item.disable ? 'no-click' : ''}`} onClick={onClick}>
-        <RenderIcon {...item} />
+        <span className="item__icon--wrapper">
+          <RenderIcon {...item} />
+        </span>
       </span>
+      <div>{title}</div>
     </Tooltip>
   );
 });
