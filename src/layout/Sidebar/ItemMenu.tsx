@@ -52,12 +52,18 @@ const Item: React.FC<IMenu> = (props: IMenu) => {
   const item = props.data;
   const location = useLocation();
   const activePath = item.menu?.activePath;
+
+  console.log(location.pathname);
+  console.log(item?.path);
+  console.log(activePath);
+
   const active = useMemo(() => {
     if (activePath) {
       const activeMenu = location.pathname.match(activePath);
+      console.log(activeMenu);
       return activeMenu ? 'menu-active' : '';
     }
-    return matchPath(location.pathname, { path: item.path, exact: item.exact })
+    return matchPath(location.pathname, { path: item?.path, exact: item?.exact })
       ? 'menu-active'
       : '';
   }, [item.exact, activePath, item.path, location.pathname]);
@@ -96,9 +102,9 @@ const Item: React.FC<IMenu> = (props: IMenu) => {
       <Link to={path} className="item-label">
         <span>
           {item.menu?.icon && <span className="item-hover__icon">{item.menu.icon}</span>}
-          <span className="item__nav">
+          <div className="item__nav">
             <FormattedMessage id={item.name} defaultMessage={item.name} />
-          </span>
+          </div>
         </span>
       </Link>
     </div>

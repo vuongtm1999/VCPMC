@@ -57,7 +57,7 @@ const AvatarUser: React.FC<IAvatar> = props => {
         </div>
       )}
       <div className="account-name">
-        <p>{user?.userFullName}</p>
+        <p>{user?.userFullName ? user?.userFullName : 'null'}</p>
       </div>
     </div>
   );

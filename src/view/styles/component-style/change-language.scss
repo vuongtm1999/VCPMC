@@ -37,6 +37,9 @@
   .ant-select,
   .ant-select-single,
   .ant-select:not(.ant-select-customize-input) {
+    max-width: 23rem;;
+
+
     .ant-select-selector {
       background-color: transparent;
       border: 1px solid #C8C8DB;
@@ -53,6 +56,7 @@
 
       .ant-select-item-option-content {
         width: 20rem;
+        font-size: 16px;
       }
 
       .ant-select-selection-item {

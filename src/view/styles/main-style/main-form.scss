@@ -9,11 +9,12 @@
 
   .ant-picker {
     border-radius: 6px;
-    padding: 0.9rem 1.6rem;
     width: 100%;
     background-color: $color-background-dark;
     color: white !important;
     box-shadow: unset;
+    padding: 0;
+    overflow: hidden;
 
     .ant-picker-suffix {
       color: $color-primary;
@@ -24,13 +25,26 @@
     display: none;
   }
 
+  .ant-picker-input {
+    height: 100%;
+    padding-right: 14px;
+  }
+
   .ant-picker-input > input {
     color: unset;
+    padding-left: 14px;
+    font-size: 12px;
   }
 
   .ant-picker-disabled {
     border: unset;
     color: $color-form-text-disabled !important;
+
+    #userProfileForm_birthDay {
+      background-color: $color-background-dark;
+      color: #F5F5FF !important;
+      height: 80%;
+    }
   }
 
   .ant-picker:hover,
@@ -148,10 +162,19 @@
   }
 
   .ant-input-disabled {
-    background: $color-input-disabled;
+    background: #3E3E50 !important;
     border-color: $color-background-light;
     color: $color-form-text-disabled !important;
+
+    &#userProfileForm_firstName,
+    &#userProfileForm_lastName,
+    &#userProfileForm_numberPhone {
+      color: #F5F5FF !important;
+      background-color: $color-background-lighter !important;
+    }
+
   }
+
 
 
   .reCaptcha__box {

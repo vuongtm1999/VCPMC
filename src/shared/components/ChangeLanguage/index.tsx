@@ -29,7 +29,7 @@ const ChangeLanguage: any = () => {
         {LANGUAGE.map((item, index) => {
           return (
             <Select.Option key={index + 'option'} value={item.value}>
-              <span>{item.label} <span className='mb-2'>{ item.icon ? <item.icon/> : 'icon' }</span></span>
+              <span>{item.label} <span className='ml-2'>{ item.icon ? <item.icon/> : 'icon' }</span></span>
             </Select.Option>
           );
         })}

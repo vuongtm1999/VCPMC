@@ -1,10 +1,12 @@
 export default {
-  'homepage.name': 'Quản lý hợp đồng',
-  'homepage.tagName': 'VIE1',
+  'homepage.manage': 'Quản lý',
+  'homepage.manage.contract': 'Quản lý hợp đồng',
+  'homepage.tagName': 'Tên',
   'homepage.tagNamed': 'VIE2',
-  'homepage.lastUpdate': 'testVIE1',
-  'homepage.group': 'testVIE2',
-  'homepage.action': 'testVIE3',
+  'homepage.lastUpdate': 'Ngày cập nhật',
+  'homepage.status': 'Tình trạng',
+  'homepage.group': 'Danh xưng',
+  'homepage.action': 'Action',
 
   'homepage.update': 'homepage.update',
   'device.deviceName': 'device.deviceName',

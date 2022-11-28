@@ -38,7 +38,7 @@ const UserProfile = () => {
   const user = useSelector((state: RootState) => state.profile.user);
   const updateAccounts = useSingleAsync(authenticationPresenter.updateProfile);
 
-  console.log(user?.birthDay);
+  // console.log(user?.birthDay);
 
   const showModal = () => {
     setIsVisible(true);
@@ -72,6 +72,7 @@ const UserProfile = () => {
           handleOk: async () => {
             await signOut(FirebaseConfig.auth);
             store.dispatch(profileStore.actions.logOut());
+
             // eslint-disable-next-line @typescript-eslint/no-unused-expressions
             // store.dispatch(removeProfile()), history('/login');
           },
@@ -86,15 +87,13 @@ const UserProfile = () => {
 
   const onUpdateProfile = (values: any) => {
 
-    console.log(values);
-
     if (values) {
       const userDoc = doc(FirebaseConfig.fbDB, 'Users', 'WoYxUFCBRvSqWkz9lUxCAkvl5352');
 
       updateDoc(userDoc, {
         firstName: values.firstName,
         lastName: values.lastName,
-        birthDay: values.birthDay.format('DD/MM/YYYY'),
+        birthDay: values.birthDay,
         numberPhone: values.numberPhone,
       })
         .then(() => console.log('Successs'))

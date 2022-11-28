@@ -8,6 +8,13 @@ $padding-inside: 1rem;
   min-width: $size-img;
 }
 
+.sider-component.big .mask .menu .menu--component--item.three-dot .item-label>span:first-child {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  left: 15px;
+}
+
 .sider-component {
   display: flex;
   width: 4rem;
@@ -18,7 +25,7 @@ $padding-inside: 1rem;
   background-color: $color-sidebar;
   border-radius: 1.6rem;
 
-  & > .w-100 {
+  &>.w-100 {
     background-color: $color-sidebar;
     height: 100vh;
     border-radius: 1.6rem;
@@ -73,7 +80,7 @@ $padding-inside: 1rem;
 
     .menu-title {
       font-weight: bold;
-      font-size: $fs-3;
+      font-size: $fs-4;
       line-height: 2.7rem;
       text-transform: uppercase;
       color: $color-text-item-sidebar;
@@ -81,7 +88,7 @@ $padding-inside: 1rem;
     }
 
     .menu {
-      margin: 0 0.8rem 0 1rem;
+      // margin: 0 0.8rem 0 1rem;
 
       .item-label {
         padding: 1rem;
@@ -93,9 +100,13 @@ $padding-inside: 1rem;
         justify-content: space-between;
         height: 5rem;
 
-        & > span:first-child {
-          display: flex;
-          align-items: center;
+        &>span:first-child {
+          text-align: center;
+          width: 100%;
+          margin-right: 16px;
+
+          // display: flex;
+          // align-items: center;
           // padding: 0rem 2rem;
         }
 
@@ -119,7 +130,7 @@ $padding-inside: 1rem;
         }
 
         .item-hover__icon {
-          margin-right: 2rem;
+          // margin-right: 2rem;
 
           svg {
             transition: color 1s;
@@ -139,33 +150,43 @@ $padding-inside: 1rem;
       }
 
       .menu--component--item {
-        border-radius: 0.6rem;
-        margin-bottom: 1rem;
+        // border-radius: 0.6rem;
+        margin-bottom: 3rem;
         transition: background-color 1s;
       }
 
       .menu--component--item.menu-active {
         position: relative;
-        background: $color-primary;
-        border-radius: 0.8rem;
-        transition: background-color 1s;
+        // border-left: 5px solid #FF7506;
+        // transition: border-left 1s;
+
+        &::after {
+          width: 8px;
+          height: 57px;
+          content: "";
+          position: absolute;
+          left: 0px;
+          top: -5px;
+          background-color: $color-sidebar-menu-item-active;
+          border-radius: 12px;
+        }
 
         .item__nav {
-          color: $color-white;
+          color: $color-sidebar-menu-item-active;
           transition: color 1s;
         }
 
         .item-hover__icon svg {
-          color: $color-white;
+          color: $color-sidebar-menu-item-active;
           transition: color 1s;
         }
 
         .icon-3dot svg {
-          color: $color-white;
+          color: $color-sidebar-menu-item-active;
         }
 
         .icon-3dot {
-          color: $color-white;
+          color: $color-sidebar-menu-item-active;
         }
       }
 
@@ -184,7 +205,7 @@ $padding-inside: 1rem;
 }
 
 .big {
-  width: 15vw;
+  width: 10.9vw;
   cursor: initial;
   background-color: $color-sidebar;
 

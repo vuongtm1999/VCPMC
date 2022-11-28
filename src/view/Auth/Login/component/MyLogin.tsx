@@ -27,7 +27,7 @@ const MyLogin = () => {
       ?.then(() => {
         setErrorStatus('');
         setTimeout(() => {
-          navigate('/');
+          navigate('/home-contract');
         }, 300);
       })
       .catch(() => {

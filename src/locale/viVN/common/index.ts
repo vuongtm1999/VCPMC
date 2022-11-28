@@ -1,4 +1,9 @@
 export default {
+  // My code
+  'common.ownership': 'Quyền sở hữu:',
+  'common.validity': 'Hiệu lực hợp đồng:',
+
+
   'common.empty': ' ',
   'common.action': 'Thao tác',
   'common.save': 'Lưu',
@@ -66,7 +71,7 @@ export default {
   'area.placeholder': 'Vui lòng nhập tên địa bàn',
   'common.remove': 'Xóa',
   'common.play': 'Phát',
-  'common.stt': 'Stt',
+  'common.stt': 'STT',
   'common.detail': 'Chi tiết',
   'common.non.title': 'Hành động',
   'common.turnOn': 'Bật',

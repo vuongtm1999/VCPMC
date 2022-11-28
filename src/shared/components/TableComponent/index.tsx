@@ -111,7 +111,7 @@ const TableComponent: React.FC<IBEPaginationTable> = <T extends object>(
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   const repository = useSingleAsync(apiServices);
-  const { formatMessage, intl } = useAltaIntl();
+  const { formatMessage } = useAltaIntl();
   const [state, setState] = useState<IState>({
     pagination: { ...InitPagination, ...props.pagination },
     option: { ...defaultOption, ...InitOption },
@@ -212,7 +212,7 @@ const TableComponent: React.FC<IBEPaginationTable> = <T extends object>(
     };
   };
 
-  //React.useImperativeHandle(register,()=>{})
+  // React.useImperativeHandle(register,()=>{})
 
   if (register) {
     register.clearSelection = () => {

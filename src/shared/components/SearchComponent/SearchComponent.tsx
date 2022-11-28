@@ -49,21 +49,20 @@ const SearchComponent = (props: IProps) => {
   };
 
   return (
-    <div className={`search-bar ${classNames ? classNames : ''}`}>
+    <div className={`search-bar ${classNames ? classNames : ''}` }>
       <Input
         type="text"
         onChange={onChange}
         onKeyDown={onClickKeyDown}
-        placeholder={'SearchComponent'}
-        // placeholder={intl.formatMessage({
-        //   id: props.placeholder,
-        //   defaultMessage: props.placeholder,
-        // })}
-        suffix={<Icon.Search />}
+        placeholder={intl.formatMessage({
+          id: props.placeholder,
+          defaultMessage: props.placeholder,
+        })}
+        // suffix={<Icon.Search />}
       />
-      {/* <a className="icon-search" onClick={() => props.onClick(valueInput)}>
+      <a className="icon-search" onClick={() => props.onClick(valueInput)}>
         <Icon.Search />
-      </a> */}
+      </a>
     </div>
   );
 };

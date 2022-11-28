@@ -28,6 +28,11 @@
   }
 }
 
+.ant-select-item-option {
+  width: 100%;
+  text-align: left;
+}
+
 .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
   background-color: $color-primary-light;
 }

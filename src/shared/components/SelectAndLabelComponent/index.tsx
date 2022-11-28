@@ -69,7 +69,7 @@ const SelectAndLabelComponent: React.FC<ISelectAndLabel> = (props: ISelectAndLab
       return undefined;
     }
     return (
-      <div>
+      <div className='mr-5'>
         <FormattedMessage id={props.textLabel} defaultMessage={props.textLabel} />
       </div>
     );
@@ -77,7 +77,7 @@ const SelectAndLabelComponent: React.FC<ISelectAndLabel> = (props: ISelectAndLab
 
   return (
     <div className={`select-label-component ${className}`}>
-      <div className="label-select">
+      <div className="d-flex flex-row align-items-center label-select">
         {renderUILabel}
         <Select
           className={'select-custom ' + (props.classNameSelect || '')}

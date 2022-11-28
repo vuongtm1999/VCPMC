@@ -1,7 +1,9 @@
 import CircleLabel from '@shared/components/CircleLabel';
-import SelectAndLabelComponent, { ISelectAndLabel } from '@shared/components/SelectAndLabelComponent';
+import SelectAndLabelComponent, {
+  ISelectAndLabel,
+} from '@shared/components/SelectAndLabelComponent';
 import { Space } from 'antd';
-import React, { Key, useEffect, useState  } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ColumnsType } from 'antd/lib/table';
 import useTable from '@shared/components/TableComponent/hook';
 import { IModal } from '@view/Homepage/interface';
@@ -15,6 +17,7 @@ import ISelect from '@core/select';
 import SearchComponent from '@shared/components/SearchComponent';
 import TableComponent from '@shared/components/TableComponent';
 import '../../style.scss';
+import AuthorizationContractPresenter from '@modules/authorization-contract/presenter';
 
 const dataTable = require('../../data.json');
 
@@ -22,8 +25,7 @@ function MainCard() {
   const { formatMessage } = useAltaIntl();
   const [search, setSearch] = useState<string>('');
   const [filter, setFilterOption] = useState<any>();
-  const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
-
+  // const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
 
   const table = useTable();
 
@@ -35,7 +37,7 @@ function MainCard() {
 
   const handleRefresh = () => {
     table.fetchData({ option: { search: search, filter: { ...filter } } });
-    setSelectedRowKeys([]);
+    // setSelectedRowKeys([]);
   };
 
   const arrayAction: IArrayAction[] = [
@@ -48,7 +50,7 @@ function MainCard() {
     { iconType: 'share' },
     {
       iconType: 'delete',
-      disable: selectedRowKeys?.length === 0,
+      // disable: selectedRowKeys?.length === 0,
       handleAction: () => {
         DeleteConfirm({
           content: formatMessage('common.delete'),
@@ -67,18 +69,29 @@ function MainCard() {
   }, [search, filter, table]);
 
   const idChooses = 'id'; //get your id here. Ex: accountId, userId,...
+  
+  //OK
   const columns: ColumnsType = [
     {
-      dataIndex: 'tagName',
+      dataIndex: 'number',
     },
     {
-      dataIndex: 'lastUpdate',
+      dataIndex: 'name',
     },
     {
-      dataIndex: 'group',
+      dataIndex: 'authorized_person',
     },
     {
-      dataIndex: 'group',
+      dataIndex: 'ownership',
+    },
+    {
+      dataIndex: 'validity',
+    },
+    {
+      dataIndex: 'date_created',
+    },
+    {
+      dataIndex: 'status',
       render: () => <CircleLabel text={formatMessage('common.statusActive')} colorCode="blue" />,
     },
     {
@@ -108,12 +121,23 @@ function MainCard() {
     },
   ];
 
-  const dataString: ISelect[] = [{ label: 'common.all', value: undefined }];
+  const dataStringOwnership: ISelect[] = [
+    { label: 'common.all', value: 'all' },
+    { label: 'Người biểu diễn', value: 'performer' },
+    { label: 'Nhà sản xuất', value: 'producer' },
+  ];
+
+  const dataStringValidity: ISelect[] = [
+    { label: 'common.all', value: 'all' },
+    { label: 'Mới', value: 'new' },
+    { label: 'Còn thời hạn', value: 'validity' },
+    { label: 'Hết hạn', value: 'expires' },
+    { label: 'Hủy', value: 'Cancel' },
+  ];
 
   const arraySelectFilter: ISelectAndLabel[] = [
-    { textLabel: 'common.keyword', dataString },
-    { textLabel: 'common.keyword', dataString },
-    { textLabel: 'common.keyword', dataString },
+    { textLabel: 'common.ownership', name: 'ownership', dataString: dataStringOwnership },
+    { textLabel: 'common.validity', name: 'validity', dataString: dataStringValidity },
   ];
 
   const handleSearch = (searchKey: string) => {
@@ -136,28 +160,29 @@ function MainCard() {
               className="margin-select"
               dataString={item.dataString}
               textLabel={item.textLabel}
+              classNameSelect={item.name}
             />
           ))}
         </div>
-        <div className="d-flex flex-column ">
-          <div className="label-select">{'Tu khoa'}</div>
-          <SearchComponent
-            onSearch={handleSearch}
-            placeholder={'Place holder'}
-            classNames="mb-0 search-table"
-          />
-        </div>
+        <SearchComponent
+          onSearch={handleSearch}
+          placeholder={'Tên hợp đồng, số hợp đồng, người uỷ quyền...'}
+          classNames="mb-0 search-table authorization-contract"
+        />
       </div>
       <TableComponent
-        // apiServices={}
+        apiServices={AuthorizationContractPresenter.getAuthorizationContracts}
+        hasStt={ true }
         defaultOption={filter}
-        translateFirstKey="homepage"
-        rowKey={res => res[idChooses]}
+        translateFirstKey="authorization.contract"
+        rowKey={record  => record[idChooses]}
+        // Filter
         register={table}
         columns={columns}
-        onRowSelect={setSelectedRowKeys}
+        // onRowSelect={setSelectedRowKeys}
         dataSource={dataTable}
         disableFirstCallApi={true}
+        className='authorization-contract'
       />
 
       <RightMenu arrayAction={arrayAction} />

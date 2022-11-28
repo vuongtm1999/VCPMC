@@ -8,6 +8,7 @@ import accounts from './accounts';
 import pageError from './pageError';
 import roles from './roles';
 import server from './server';
+import table from './table';
 
 export default {
   ...viVN,
@@ -18,5 +19,6 @@ export default {
   ...roles,
   ...homepage,
   ...accounts,
+  ...table,
   Form,
 };
