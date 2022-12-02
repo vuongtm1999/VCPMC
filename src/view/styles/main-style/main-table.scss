@@ -2,6 +2,23 @@
   margin-top: -7.1rem;
 }
 
+.ant-pagination-jump-prev .ant-pagination-item-container .ant-pagination-item-link-icon {
+  color: $color-table-text;
+}
+
+.ant-pagination-jump-prev .ant-pagination-item-container .ant-pagination-item-ellipsis {
+  color: $color-table-text;
+}
+
+.ant-pagination-jump-next .ant-pagination-item-container .ant-pagination-item-link-icon {
+  color: $color-table-text;
+}
+
+.ant-pagination-jump-next .ant-pagination-item-container .ant-pagination-item-ellipsis {
+  color: $color-table-text;
+}
+
+
 .card-main-table {
   background: $color-table-background;
   border-radius: 1.2rem;
@@ -24,6 +41,7 @@
       border: 1px solid $color-primary;
       border-radius: 4px;
       margin: 0 8px;
+      background: transparent;
     }
 
     .ant-input-number-handler-wrap {
@@ -47,7 +65,7 @@
   .pagesize {
     &--show,
     &--entries {
-      color: $color-primary;
+      color: $color-paging-text;
       font-size: $fs-0;
     }
   }
@@ -69,8 +87,8 @@
 
   //table head
   .ant-table-thead > tr > th {
-    color: $color-white;
-    background: $color-table-head;
+    color: $color-table-head;
+    background: $color-table-background;
     font-weight: $font-weight-medium;
   }
 
@@ -78,16 +96,18 @@
   .ant-table-tbody > tr > td,
   .ant-table-thead > tr > th {
     padding: 1.2rem 0.8rem;
+    border-bottom: 1px solid #727288;
   }
 
   //for text color
   .ant-table {
     color: $color-table-text;
+    background-color: $color-table-background;
   }
 
   //for even row background color
   tr.ant-table-row:nth-child(even) {
-    background: $color-grey-light-1;
+    background: $color-table-background;
   }
 
   // for border table
@@ -120,29 +140,32 @@
   }
 
   li.ant-pagination-item {
-    color: $color-black;
+    color: $color-table-text;
+    background: transparent;
   }
 
   li.ant-pagination-item-active {
-    background: $color-white;
-    border-radius: 4px;
-    border: 1px solid $color-primary;
-    color: $color-black;
+    background: #FF750680;
+    border-radius: 50%;
+    color: $color-table-text;
   }
 
   .ant-pagination-disabled .ant-pagination-item-link {
     color: $color-primary;
     border-color: transparent;
+    background: transparent;
   }
 
   .ant-pagination-prev .ant-pagination-item-link,
   .ant-pagination-next .ant-pagination-item-link {
+    color: #E5E5E5;
     border-color: transparent;
+    background: transparent;
   }
 
   .ant-pagination-next .ant-pagination-item-link {
-    background-color: $color-white;
-    color: $color-primary;
+    background: transparent;
+    color: $color-table-text;
   }
 
   .icon-edit {
@@ -190,7 +213,12 @@
 }
 
 .main-table:hover .ant-table-thead > tr > th {
-  background: #61c6e9;
+  // background: #61c6e9;
+}
+
+.ant-table-tbody > tr.ant-table-row:hover > td {
+  opacity: 0.8;
+  background-color: unset;
 }
 
 .ant-select:not(.ant-select-disabled):hover,

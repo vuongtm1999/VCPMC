@@ -1,15 +1,26 @@
 import { IRouter } from '@routers/interface';
 import { UilFileGraph } from '@iconscout/react-unicons';
 import React from 'react';
-import { routerViewProfile } from '@view/Auth/Profile/router';
 
 export const routerHomepage: IRouter = {
-  path: '/home-contract',
+  path: '/home-authorized-contract',
   loader: import('./index'),
   exact: true,
-  name: 'homepage.manage.contract', //translate here for breadcrumb and sidebar
+  name: 'homepage.manage.contract.authorized', //translate here for breadcrumb and sidebar
   menu: {
-    icon: <UilFileGraph size="24" className="icon-feather red-icon" />,
+    'exact': true,
+    activePath: /home/i,
+    'hideInNavbar': false,
+    content: 'Test',
+  },
+};
+
+export const routerHomepageExploitation: IRouter = {
+  path: '/home-exploitation-contract',
+  loader: import('./ExploitationPage'),
+  exact: true,
+  name: 'homepage.manage.contract.exploitation', //translate here for breadcrumb and sidebar
+  menu: {
     'exact': true,
     activePath: /home/i,
     'hideInNavbar': false,
@@ -36,5 +47,5 @@ export const routerHomepageMain: IRouter = {
     'hideInNavbar': false,
     content: 'Test',
   },
-  routes: [routerHomepage],
+  routes: [routerHomepage, routerHomepageExploitation],
 };

@@ -5,8 +5,21 @@ export default {
   'authorization.contract.ownership': 'Người biểu diễn',
   'authorization.contract.validity': 'Hiệu lực hợp đồng',
   'authorization.contract.date_created': 'Ngày tạo',
-  'authorization.contract.status': 'authorization.contract.status',
+  'authorization.contract.status': 'Status',
   'authorization.contract.action': 'Action',
+
+  'authorization.contract.none': ' ',
+
+  'exploitation.contract.number': 'Số hợp đồng',
+  'exploitation.contract.client': 'Khách hàng',
+  'exploitation.contract.date_created': 'Ngày tạo',
+  'exploitation.contract.effective_date': 'Ngày hiệu lực',
+  'exploitation.contract.expiration_date': 'Ngày hết hạn',
+  'exploitation.contract.validity': 'Hiệu lực hợp đồng',
+  'exploitation.contract.none': ' ',
+
+
+
 
 
 

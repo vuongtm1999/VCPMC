@@ -107,11 +107,15 @@ $color-breadcrumb-text-last: $color-main-text;
 $color-breadcrumb-icon: $color-main-text;
 
 //--3. Table--
-$color-table-background: $color-white;
+//Mycode
+$color-paging-text: #F5F5FF;
+//end My code
+
+$color-table-background: #2F2F41B2;
 $color-table-background-even: $color-primary;
-$color-table-text: $color-black;
-$color-table-border: #c8c8c8;
-$color-table-head: $color-primary;
+$color-table-text: $color-white;
+$color-table-border: #727288;
+$color-table-head: #FFAC69;
 
 //--4. Form & Modal--
 $color-modal-background: #3E3E5B;

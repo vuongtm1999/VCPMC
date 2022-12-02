@@ -1,7 +1,7 @@
 import './style.scss';
 
 import { Button, Col, Form, Input, Row } from 'antd';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 
@@ -17,11 +17,9 @@ import { useAltaIntl } from '@shared/hook/useTranslate';
 
 import AvatarUser from './components/AvatarUser';
 import ModalChangePassWord from './components/ModalChangePassWord';
-import { routerViewProfile } from './router';
 import { signOut } from 'firebase/auth';
 import FirebaseConfig from 'src/firebase/FirebaseConfig';
 import { doc, updateDoc } from 'firebase/firestore';
-import CheckIcon from '@assets/icon/Check';
 import { DatePicker } from 'antd';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
@@ -38,13 +36,11 @@ const UserProfile = () => {
   const user = useSelector((state: RootState) => state.profile.user);
   const updateAccounts = useSingleAsync(authenticationPresenter.updateProfile);
 
-  // console.log(user?.birthDay);
-
   const showModal = () => {
     setIsVisible(true);
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (user != null) {
       setIsDisableForm(true);
       form.setFieldsValue(user);

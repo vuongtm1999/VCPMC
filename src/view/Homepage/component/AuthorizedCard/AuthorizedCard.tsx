@@ -1,31 +1,25 @@
-import CircleLabel from '@shared/components/CircleLabel';
 import SelectAndLabelComponent, {
   ISelectAndLabel,
 } from '@shared/components/SelectAndLabelComponent';
-import { Space } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { ColumnsType } from 'antd/lib/table';
 import useTable from '@shared/components/TableComponent/hook';
 import { IModal } from '@view/Homepage/interface';
-import EditIconComponent from '@shared/components/EditIconComponent';
-import { useAltaIntl } from '@shared/hook/useTranslate';
+// import { useAltaIntl } from '@shared/hook/useTranslate';
 import RightMenu, { IArrayAction } from '@layout/RightMenu';
-import { DeleteConfirm } from '@shared/components/ConfirmDelete';
-import ModalComponents from '../../component/MainModal/ModalHomepage';
-import InformationIconComponent from '@shared/components/InformationIcon';
+import ModalComponents from '../MainModal/ModalHomepage';
 import ISelect from '@core/select';
 import SearchComponent from '@shared/components/SearchComponent';
 import TableComponent from '@shared/components/TableComponent';
 import '../../style.scss';
 import AuthorizationContractPresenter from '@modules/authorization-contract/presenter';
+import EllipseIcon from '@assets/icon/Ellipse';
+import { Link } from 'react-router-dom';
 
-const dataTable = require('../../data.json');
-
-function MainCard() {
-  const { formatMessage } = useAltaIntl();
+function AuthorizedCard() {
+  // const { formatMessage } = useAltaIntl();
   const [search, setSearch] = useState<string>('');
   const [filter, setFilterOption] = useState<any>();
-  // const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
 
   const table = useTable();
 
@@ -37,7 +31,6 @@ function MainCard() {
 
   const handleRefresh = () => {
     table.fetchData({ option: { search: search, filter: { ...filter } } });
-    // setSelectedRowKeys([]);
   };
 
   const arrayAction: IArrayAction[] = [
@@ -47,21 +40,6 @@ function MainCard() {
         setModal({ dataEdit: null, isVisible: true });
       },
     },
-    { iconType: 'share' },
-    {
-      iconType: 'delete',
-      // disable: selectedRowKeys?.length === 0,
-      handleAction: () => {
-        DeleteConfirm({
-          content: formatMessage('common.delete'),
-          handleOk: () => {
-            // call Api Delete here
-            handleRefresh();
-          },
-          handleCancel: () => {},
-        });
-      },
-    },
   ];
 
   useEffect(() => {
@@ -69,7 +47,7 @@ function MainCard() {
   }, [search, filter, table]);
 
   const idChooses = 'id'; //get your id here. Ex: accountId, userId,...
-  
+
   //OK
   const columns: ColumnsType = [
     {
@@ -86,53 +64,53 @@ function MainCard() {
     },
     {
       dataIndex: 'validity',
+      render: (_item: any) =>
+        _item ? (
+          <div className="d-flex align-items-center">
+            <EllipseIcon className="text-primary mr-1" />
+            Còn thời hạn
+          </div>
+        ) : (
+          <div>
+            <EllipseIcon className="text-danger mr-1" />
+            Đã huỷ
+          </div>
+        ),
     },
     {
       dataIndex: 'date_created',
+      // render: (_item: any, record: any) => (
+      //   <div>{ new Date(record.date_created).toLocaleDateString('en-US') }</div>
+      // ),
     },
     {
-      dataIndex: 'status',
-      render: () => <CircleLabel text={formatMessage('common.statusActive')} colorCode="blue" />,
-    },
-    {
-      dataIndex: 'action',
-      render: (_item: any, record: any) => (
-        <Space>
-          <EditIconComponent
-            onClick={() => {
-              setModal({
-                dataEdit: record,
-                isVisible: true,
-                isReadOnly: false,
-              });
-            }}
-          />
-          <InformationIconComponent
-            onClick={() => {
-              setModal({
-                dataEdit: record,
-                isVisible: true,
-                isReadOnly: true,
-              });
-            }}
-          />
-        </Space>
-      ),
+      dataIndex: 'none',
+      render: (_item: any, record: any) =>
+        record.validity ? (
+          <div>
+            <Link className='tag-link' to={'/detail-contract'}>Xem chi tiết</Link>
+          </div>
+        ) : (
+          <div>
+            <Link className='tag-link' to={'/detail-contract'}>Xem chi tiết</Link>
+            <Link className='tag-link ml-2' to={'/reason-cancel-contract'}>Lý do hủy</Link>
+          </div>
+        ),
     },
   ];
 
   const dataStringOwnership: ISelect[] = [
-    { label: 'common.all', value: 'all' },
-    { label: 'Người biểu diễn', value: 'performer' },
-    { label: 'Nhà sản xuất', value: 'producer' },
+    { label: 'common.all', value: undefined },
+    { label: 'Người biểu diễn', value: 'Người biểu diễn' },
+    { label: 'Nhà sản xuất', value: 'Nhà sản xuất' },
   ];
 
   const dataStringValidity: ISelect[] = [
-    { label: 'common.all', value: 'all' },
+    { label: 'common.all', value: undefined },
     { label: 'Mới', value: 'new' },
     { label: 'Còn thời hạn', value: 'validity' },
     { label: 'Hết hạn', value: 'expires' },
-    { label: 'Hủy', value: 'Cancel' },
+    { label: 'Hủy', value: 'cancel' },
   ];
 
   const arraySelectFilter: ISelectAndLabel[] = [
@@ -149,6 +127,7 @@ function MainCard() {
       setFilterOption((pre: any) => ({ ...pre, [name]: status }));
     }
   };
+  
   return (
     <div className="main-card">
       <div className="d-flex flex-row justify-content-md-between mb-3 align-items-end">
@@ -172,17 +151,16 @@ function MainCard() {
       </div>
       <TableComponent
         apiServices={AuthorizationContractPresenter.getAuthorizationContracts}
-        hasStt={ true }
+        hasStt={true}
         defaultOption={filter}
         translateFirstKey="authorization.contract"
-        rowKey={record  => record[idChooses]}
+        rowKey={record => record[idChooses]}
         // Filter
         register={table}
         columns={columns}
-        // onRowSelect={setSelectedRowKeys}
-        dataSource={dataTable}
+        // dataSource={dataTable}
         disableFirstCallApi={true}
-        className='authorization-contract'
+        className="authorization-contract"
       />
 
       <RightMenu arrayAction={arrayAction} />
@@ -192,4 +170,4 @@ function MainCard() {
   );
 }
 
-export default MainCard;
+export default AuthorizedCard;

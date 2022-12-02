@@ -72,7 +72,7 @@ const RenderItem = React.memo(({ item }: { item: IArrayAction }) => {
           <RenderIcon {...item} />
         </span>
       </span>
-      <div>{title}</div>
+      <div className='text-white'>{title}</div>
     </Tooltip>
   );
 });

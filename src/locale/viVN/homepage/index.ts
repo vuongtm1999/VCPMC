@@ -1,6 +1,9 @@
 export default {
   'homepage.manage': 'Quản lý',
   'homepage.manage.contract': 'Quản lý hợp đồng',
+  'homepage.manage.contract.authorized': 'Hợp đồng ủy quyền',
+  'homepage.manage.contract.exploitation': 'Hợp đồng khai thác',
+
   'homepage.tagName': 'Tên',
   'homepage.tagNamed': 'VIE2',
   'homepage.lastUpdate': 'Ngày cập nhật',

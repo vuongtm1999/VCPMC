@@ -42,6 +42,7 @@ const App: React.FC = () => {
   const memoLangData = useMemo(() => {
     return locale[language];
   }, [language]);
+  
   useEffect(() => {
     if (!token && !location.pathname.includes('/reset-password')) {
       history('/login');

@@ -1,39 +1,87 @@
 import { PaginationEntity } from '@core/pagination/entity';
-import { addDoc, collection, doc, getCountFromServer, getDoc, getDocs, limit, orderBy, query, setDoc, startAfter } from 'firebase/firestore';
-import  FirebaseConfig  from '../FirebaseConfig';
+import { addDoc, collection, doc, getDoc, getDocs, orderBy, query, setDoc, startAfter, where } from 'firebase/firestore';
+import FirebaseConfig from '../FirebaseConfig';
 
 const db = FirebaseConfig.fbDB;
 
+function queryData(paging: any, option: any, collectionName: any) {
+  const myCollecttion = collection(db, collectionName);
+
+  let ownershipQuery;
+  let validityQuery;
+  // only ownership search
+  // let searchQuery;
+
+  // Select validity 
+  if (option.filter.validity === undefined || option.filter.validity === '0') {
+    validityQuery = where('id', '!=', ' ');
+  } else {
+    if (option.filter.validity === 'validity') {
+      validityQuery = where('validity', '==', true);
+    }
+    if (option.filter.validity === 'expires') {
+      validityQuery = where('validity', '==', false);
+    }
+  }
+
+  // Select ownership
+  if (option.filter.ownership === undefined || option.filter.ownership === '0') {
+    ownershipQuery = where('id', '!=', ' ');
+  } else {
+    console.log(option.filter.ownership === 'Người biểu diễn');
+    if (option.filter.ownership === 'Người biểu diễn') {
+      ownershipQuery = where('ownership', '==', 'Người biểu diễn');
+    }
+    if (option.filter.ownership === 'Nhà sản xuất') {
+      ownershipQuery = where('ownership', '==', 'Nhà sản xuất');
+    }
+  }
+
+  // Queries for firebase
+  let q;
+
+  if (ownershipQuery.ma.segments[0] === validityQuery.ma.segments[0] && validityQuery.ga === ownershipQuery.ga) {
+    q = query(myCollecttion,
+      orderBy('id'),
+      startAfter((paging.current - 1) * paging.pageSize),
+      ownershipQuery,
+    );
+  } else {
+    q = query(myCollecttion,
+      orderBy('id'),
+      startAfter((paging.current - 1) * paging.pageSize),
+      ownershipQuery,
+      validityQuery,
+    );
+  }
+
+
+  return q;
+}
+
 export const getDatas = async (paging: any, option: any, collectionName: any): Promise<{ data: Array<any>; info: PaginationEntity }> => {
+  const q = queryData(paging, option, collectionName);
 
-  // const whereQuery = option.filter ? where(option.filter.field, "==", option.filter.value) : where("deviceName", "!=", " ")
-  const deviceCollecttion = collection(db, collectionName);
-
-  const q = query(deviceCollecttion,
-    orderBy('key'),
-    startAfter((paging.current - 1) * paging.pageSize),
-    limit(paging.pageSize));
-
-  const docs = getDocs(q);
-  const count = getCountFromServer(deviceCollecttion);
+  const docs = await getDocs(q);
+  // const count = await getCountFromServer(deviceCollecttion);
 
   const data = await docs;
-  const total = await count;
+  // const total = await count;
 
-  const customdata = data.docs.map((mydoc) => ({ ...mydoc.data(), id: mydoc.id }));
-
+  const customdata = data.docs.map((d) => ({ ...d.data(), id: d.id }));
 
   console.group([
     '===========================================================================',
     customdata,
-    total.data().count,
     paging,
     option.filter.field,
     option.filter.value,
     '============================================================================',
   ]);
   console.groupEnd();
-  return { data: customdata, info: { total: total.data().count } };
+
+
+  return { data: customdata, info: { total: data.size } };
 };
 
 
@@ -46,7 +94,7 @@ export const getSingleData = async (collectionName: string, documentId: string):
   if (docSnap.exists()) {
     return { data: docSnap.data(), status: true };
   } else {
-    return { data: 'Data dont exist!!!', status: false };
+    return { data: 'Data don not exist!!!', status: false };
   }
 };
 
