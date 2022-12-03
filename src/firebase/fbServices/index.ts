@@ -28,12 +28,12 @@ function queryData(paging: any, option: any, collectionName: any) {
   if (option.filter.ownership === undefined || option.filter.ownership === '0') {
     ownershipQuery = where('id', '!=', ' ');
   } else {
-    console.log(option.filter.ownership === 'Người biểu diễn');
     if (option.filter.ownership === 'Người biểu diễn') {
-      ownershipQuery = where('ownership', '==', 'Người biểu diễn');
+      ownershipQuery = where('ownership', '==', option.filter.ownership);
     }
     if (option.filter.ownership === 'Nhà sản xuất') {
-      ownershipQuery = where('ownership', '==', 'Nhà sản xuất');
+      console.log(option.filter.ownership === 'Nhà sản xuất');
+      ownershipQuery = where('ownership', '==', option.filter.ownership);
     }
   }
 
@@ -54,7 +54,6 @@ function queryData(paging: any, option: any, collectionName: any) {
       validityQuery,
     );
   }
-
 
   return q;
 }

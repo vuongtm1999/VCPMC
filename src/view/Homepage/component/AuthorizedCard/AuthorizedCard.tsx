@@ -101,8 +101,8 @@ function AuthorizedCard() {
 
   const dataStringOwnership: ISelect[] = [
     { label: 'common.all', value: undefined },
-    { label: 'Người biểu diễn', value: 'Người biểu diễn' },
-    { label: 'Nhà sản xuất', value: 'Nhà sản xuất' },
+    { label: 'authorization.table.performer', value: 'Người biểu diễn' },
+    { label: 'authorization.table.producer', value: 'Nhà sản xuất' },
   ];
 
   const dataStringValidity: ISelect[] = [

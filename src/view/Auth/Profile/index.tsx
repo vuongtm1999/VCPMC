@@ -77,8 +77,8 @@ const UserProfile = () => {
     },
   ];
 
-  const chooseFile = (file: any) => {
-    form.setFieldsValue({ avatar: file });
+  const chooseFile = (url: any) => {
+    form.setFieldsValue({ avatar: url });
   };
 
   const onUpdateProfile = (values: any) => {
@@ -91,6 +91,7 @@ const UserProfile = () => {
         lastName: values.lastName,
         birthDay: values.birthDay,
         numberPhone: values.numberPhone,
+        avatar: values.avatar,
       })
         .then(() => console.log('Successs'))
         .catch(error => console.log(error));

@@ -3,13 +3,12 @@ import TabComponent from '@shared/components/TabsComponent';
 import './style.scss';
 import { addDoc, collection } from 'firebase/firestore';
 import FirebaseConfig from 'src/firebase/FirebaseConfig';
+import UploadWidget from './CloundynaryWidget';
 
 const Toolpage = () => {
   const [id, setId] = useState<number>(1);
 
   const randomNumber = Math.floor(Math.random() * 100);
-
-  console.log('randomNumber: ', randomNumber);
 
   function randomIntFromInterval(min, max) {
     // min and max included
@@ -22,17 +21,18 @@ const Toolpage = () => {
     randomNumber < 25
       ? 'Mới'
       : randomNumber > 25 && randomNumber < 50
-        ? 'Đang hiệu lực'
-        : randomNumber > 50 && randomNumber < 75
-          ? 'Hết hiệu lực'
-          : 'Đã huỷ';
-  
+      ? 'Đang hiệu lực'
+      : randomNumber > 50 && randomNumber < 75
+      ? 'Hết hiệu lực'
+      : 'Đã huỷ';
+
   const ownership =
-          randomNumber < 50
-            ? 'Người biểu diễn'
-            : randomNumber > 50 && randomNumber < 75
-              ? 'Nhà sản xuất' : 'Người biểu diễn \n Nhà sản xuất';
-           
+    randomNumber < 50
+      ? 'Người biểu diễn'
+      : randomNumber > 50 && randomNumber < 75
+      ? 'Nhà sản xuất'
+      : 'Người biểu diễn \n Nhà sản xuất';
+
   const addData = async () => {
     try {
       const docRef = await addDoc(collection(FirebaseConfig.fbDB, 'exploitation-contract'), {
@@ -53,11 +53,31 @@ const Toolpage = () => {
     }
   };
 
-  const onChange = (key: string) => {
-    if (key === '2') {
-    } else {
+  const onChange = (key: string) => {};
+
+  function handleOnUpload(error, result, widget) {
+    if (error) {
+      widget.close({
+        quiet: true,
+      });
+      return;
     }
-  };
+  }
+
+  const tagTwo = (
+    <>
+      <UploadWidget onUpload={handleOnUpload}>
+        {({ open }) => {
+          function handleOnClick(e) {
+            e.preventDefault();
+            open();
+          }
+          return <button onClick={handleOnClick}>Upload an Image</button>;
+        }}
+      </UploadWidget>
+      <img id="uploadedimage" src=""></img>
+    </>
+  );
 
   const tabItem = [
     {
@@ -72,7 +92,7 @@ const Toolpage = () => {
     {
       label: 'Tool 2',
       key: '2',
-      children: <div className="text-light">tool 2</div>,
+      children: <div className="text-light">{tagTwo}</div>,
     },
   ];
 

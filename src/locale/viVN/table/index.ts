@@ -7,8 +7,11 @@ export default {
   'authorization.contract.date_created': 'Ngày tạo',
   'authorization.contract.status': 'Status',
   'authorization.contract.action': 'Action',
-
   'authorization.contract.none': ' ',
+
+  //Table authorization
+  'authorization.table.performer': 'Người biểu diễn',
+  'authorization.table.producer': 'Nhà sản xuất',
 
   'exploitation.contract.number': 'Số hợp đồng',
   'exploitation.contract.client': 'Khách hàng',
