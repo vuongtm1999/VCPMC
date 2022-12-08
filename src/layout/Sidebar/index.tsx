@@ -66,7 +66,7 @@ const SiderComponent: React.FC<{
       </div>
       <div className="mask" style={{ width }}>
         <div className="logo">
-          <img src={logoVCPMC} alt="logo" onClick={() => navigate('/home-contract')} />
+          <img src={logoVCPMC} alt="logo" onClick={() => navigate('/contract')} />
         </div>
         <div className="menu">
           <RenderMenu listNav={privatePage} location={location.pathname} />

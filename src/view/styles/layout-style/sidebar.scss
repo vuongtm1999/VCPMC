@@ -91,7 +91,7 @@ $padding-inside: 1rem;
       // margin: 0 0.8rem 0 1rem;
 
       .item-label {
-        padding: 1rem;
+        padding-right: 1rem;
         display: flex;
         flex-direction: row;
         position: relative;
@@ -103,7 +103,6 @@ $padding-inside: 1rem;
         &>span:first-child {
           text-align: center;
           width: 100%;
-          margin-right: 16px;
 
           // display: flex;
           // align-items: center;
@@ -161,12 +160,12 @@ $padding-inside: 1rem;
         // transition: border-left 1s;
 
         &::after {
-          width: 8px;
-          height: 57px;
+          width: 0.6vw;
+          height: calc(100% + 10px);
           content: "";
           position: absolute;
           left: 0px;
-          top: -5px;
+          top: -6px;
           background-color: $color-sidebar-menu-item-active;
           border-radius: 12px;
         }

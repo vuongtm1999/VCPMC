@@ -50,7 +50,7 @@ module.exports = {
     'linebreak-style': [0, 'unix'],
     quotes: [
       'warn',
-      'single',
+      // 'single',
       {
         allowTemplateLiterals: true,
       },

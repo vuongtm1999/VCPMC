@@ -53,14 +53,14 @@ const Item: React.FC<IMenu> = (props: IMenu) => {
   const location = useLocation();
   const activePath = item.menu?.activePath;
 
-  console.log(location.pathname);
-  console.log(item?.path);
-  console.log(activePath);
+  // console.log(location.pathname);
+  // console.log(item?.path);
+  // console.log(activePath);
 
   const active = useMemo(() => {
     if (activePath) {
       const activeMenu = location.pathname.match(activePath);
-      console.log(activeMenu);
+      // console.log(activeMenu);
       return activeMenu ? 'menu-active' : '';
     }
     return matchPath(location.pathname, { path: item?.path, exact: item?.exact })

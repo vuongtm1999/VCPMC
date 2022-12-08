@@ -34,7 +34,7 @@ const Homepage = () => {
   return (
     <div className="homepage">
       {/* {keyDefault} */}
-      <MainTitleComponent title={title} breadcrumbs={routerHomepage} />
+      <MainTitleComponent title={title} breadcrumbs={routerHomepage} firstBreadCrum="homepage.manage" />
 
       <TabComponent defaultActiveKey='1' onChange={onChange} items={tabItem} />
     </div>

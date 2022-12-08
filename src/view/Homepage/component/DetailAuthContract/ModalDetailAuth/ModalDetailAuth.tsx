@@ -1,14 +1,13 @@
-import { Checkbox, Form, Modal } from 'antd';
+import { Checkbox, Form, Modal, Input } from 'antd';
 import React, { useEffect, useState } from 'react';
 
 import { IFormContent, renderForm } from '@hoc/FormHelper';
 import ButtonForm from '@shared/components/ButtonForm';
 import { useAltaIntl } from '@shared/hook/useTranslate';
 
-import { IPropsModal } from '../../interface';
-import Input from 'antd/lib/input';
+import { IPropsModal } from '../../../interface';
 
-const ModalHomepage = (props: IPropsModal) => {
+const DetailAuthModal = (props: IPropsModal) => {
   const { modal, setModal, handleRefresh } = props;
   const [form] = Form.useForm();
   const { formatMessage, intl } = useAltaIntl();
@@ -18,21 +17,9 @@ const ModalHomepage = (props: IPropsModal) => {
   const formContent: IFormContent[] = React.useMemo<IFormContent[]>(() => {
     return [
       {
-        name: 'deviceName',
-        label: 'device.deviceName',
+        name: 'reason',
+        // label: 'device.deviceName',
         rules: [{ required: true }, { max: 255 }],
-        readOnly: modal.isReadOnly,
-      },
-
-      {
-        label: 'device.deviceCode',
-        name: 'deviceCode',
-        readOnly: modal.isReadOnly,
-      },
-
-      {
-        name: 'deviceSimNumber',
-        label: 'device.deviceSimNumber',
         readOnly: modal.isReadOnly,
       },
     ];
@@ -46,8 +33,8 @@ const ModalHomepage = (props: IPropsModal) => {
       setTypeModal('ADD');
     }
   }, [modal]);
-  const handleOk = value => {
-    console.log(value);
+  const handleOk = () => {
+    console.log('handleOK');
     form.submit();
   };
   const handleCancel = () => {
@@ -55,9 +42,9 @@ const ModalHomepage = (props: IPropsModal) => {
     form.resetFields();
     handleRefresh();
   };
-  const onFinish = (value: any) => {
+  const onFinish = (values: any) => {
     //thêm xóa sửa value here
-    console.debug('value', value);
+    console.log('value', values);
     if (typeModal === 'EDIT') {
       //call api
       handleCancel();
@@ -67,7 +54,7 @@ const ModalHomepage = (props: IPropsModal) => {
     }
   };
 
-  const translateFirstKey = 'homepage'; //put your translate here
+  const translateFirstKey = 'auth'; //put your translate here
 
   return (
     <Modal
@@ -77,7 +64,7 @@ const ModalHomepage = (props: IPropsModal) => {
           ? modal.isReadOnly
             ? formatMessage(`${translateFirstKey}.information`)
             : formatMessage(`${translateFirstKey}.update`)
-          : formatMessage(`${translateFirstKey}.create`)
+          : formatMessage(`${translateFirstKey}.contract.cancel`)
       }
       visible={modal.isVisible}
       onOk={handleOk}
@@ -98,14 +85,11 @@ const ModalHomepage = (props: IPropsModal) => {
         layout="vertical" //important
         name="basic"
         onFinish={onFinish}
-        initialValues={{
-          reason: 'Hủy hợp đồng để tạo hợp đồng mới với giá trị và thời hạn lâu hơn.',
-        }}
       >
-        {/* {renderForm(formContent, intl)} */}
         <Form.Item name="reason">
-          <Input.TextArea disabled={true} value={'value'} rows={8} />
+          <Input.TextArea placeholder='Cho chúng tôi biết lý do bạn muốn huỷ hợp đồng uỷ quyền này...' rows={8} />
         </Form.Item>
+        {/* {renderForm(formContent, intl)} */}
         {modal?.dataEdit && (
           <Form.Item
             label={formatMessage(`${translateFirstKey}.accountStatus`)}
@@ -119,4 +103,4 @@ const ModalHomepage = (props: IPropsModal) => {
   );
 };
 
-export default ModalHomepage;
+export default DetailAuthModal;

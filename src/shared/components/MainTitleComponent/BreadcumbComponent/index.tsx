@@ -6,7 +6,7 @@ import { IRouter } from '@routers/interface';
 import { useAltaIntl } from '@shared/hook/useTranslate';
 import { IBreadcrumbs } from '../inteface';
 
-const BreadcrumbComponent: React.FC<IBreadcrumbs> = ({ breadcrumbs, className = '' }) => {
+const BreadcrumbComponent: React.FC<IBreadcrumbs> = ({ breadcrumbs, className = '', firstBreadCrum }) => {
   const { formatMessage } = useAltaIntl();
   const renderBreadcrumbArray = () => {
     if (Array.isArray(breadcrumbs) && breadcrumbs.length > 0) {
@@ -46,7 +46,7 @@ const BreadcrumbComponent: React.FC<IBreadcrumbs> = ({ breadcrumbs, className = 
   return (
     <div className={`breadcrumb__box ${className}`}>
       <span className="breadcrumb__li">
-        <Link to="/">{formatMessage('common.home')}</Link>
+        <Link to="/">{firstBreadCrum ? formatMessage(firstBreadCrum)  :formatMessage('common.home')}</Link>
       </span>
       {renderBreadcrumbArray()}
     </div>

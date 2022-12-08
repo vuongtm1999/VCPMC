@@ -4,6 +4,7 @@ import { IRouter } from '@routers/interface';
 export interface IBreadcrumbs {
   className?: any;
   breadcrumbs: IRouter[] | IRouter;
+  firstBreadCrum?: string;
 }
 export interface ITitle {
   title: string | React.ReactNode;

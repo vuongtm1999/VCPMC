@@ -1,4 +1,31 @@
-.homepage{
+@use '../styles/variable' as *;
+
+.homepage {
 
     
+}
+
+.detail-info-contract {
+    color: white;
+    
+    .opacity-80 {
+        opacity: 0.8;
+    }
+
+    .text-lighter-primary {
+        color: $color-primary-light;
+    }
+
+    .wrapper-row-2 {
+        margin-top: 3%;
+    }
+}
+
+span.tag-link {
+    color: $color-primary;
+}
+
+span.tag-link:hover {
+    text-decoration: none;
+    opacity: 0.6;
 }

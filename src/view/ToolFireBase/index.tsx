@@ -21,9 +21,9 @@ const Toolpage = () => {
     randomNumber < 25
       ? 'Mới'
       : randomNumber > 25 && randomNumber < 50
-      ? 'Đang hiệu lực'
+      ? 'Còn thời hạn'
       : randomNumber > 50 && randomNumber < 75
-      ? 'Hết hiệu lực'
+      ? 'Đã hết hạn'
       : 'Đã huỷ';
 
   const ownership =

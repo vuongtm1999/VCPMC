@@ -8,7 +8,7 @@ import { updatePassword } from 'firebase/auth';
 import FirebaseConfig from 'src/firebase/FirebaseConfig';
 import * as types from '@firebase/auth-types';
 import { message } from 'antd';
-import CheckIcon from '@assets/icon/Check';
+import CheckIcon from '@assets/icon/check';
 
 interface IChangePassWord {
   isModalVisible: boolean;
@@ -31,7 +31,7 @@ const ModalChangePassWord = (props: IChangePassWord) => {
       type: 'success',
       content: 'Đổi mật khẩu thành công!',
       duration: 0.8,
-      icon: CheckIcon('no'),
+      icon: <CheckIcon />,
     });
 
     setIsModalVisible(false);
@@ -48,7 +48,7 @@ const ModalChangePassWord = (props: IChangePassWord) => {
           console.log('Update Password successful!');
         })
         .catch(error => {
-          console.log('Update Password', error);
+          console.log('Update Password Error:', error);
         });
 
       handleCancel();

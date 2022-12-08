@@ -2,15 +2,15 @@ import './style.scss';
 
 import { Button, Col, Form, Input, Row } from 'antd';
 import React, { useEffect, useLayoutEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 
-import store from '@core/store/redux';
+import store, { UIDSelector } from '@core/store/redux';
 import { useSingleAsync } from '@hook/useAsync';
 import RightMenu, { IArrayAction } from '@layout/RightMenu';
 import { RootState } from '@modules';
 import authenticationPresenter from '@modules/authentication/presenter';
-import profileStore from '@modules/authentication/profileStore';
+import profileStore, { TokenSelector } from '@modules/authentication/profileStore';
 import { DeleteConfirm } from '@shared/components/ConfirmDelete';
 import MainTitleComponent from '@shared/components/MainTitleComponent';
 import { useAltaIntl } from '@shared/hook/useTranslate';
@@ -35,12 +35,13 @@ const UserProfile = () => {
   const [isDisableForm, setIsDisableForm] = useState(true);
   const user = useSelector((state: RootState) => state.profile.user);
   const updateAccounts = useSingleAsync(authenticationPresenter.updateProfile);
+  const { uID } = useSelector(UIDSelector);
 
   const showModal = () => {
     setIsVisible(true);
   };
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (user != null) {
       setIsDisableForm(true);
       form.setFieldsValue(user);
@@ -81,10 +82,9 @@ const UserProfile = () => {
     form.setFieldsValue({ avatar: url });
   };
 
-  const onUpdateProfile = (values: any) => {
-
+  const onUpdateProfile = async (values: any) => {
     if (values) {
-      const userDoc = doc(FirebaseConfig.fbDB, 'Users', 'WoYxUFCBRvSqWkz9lUxCAkvl5352');
+      const userDoc = doc(FirebaseConfig.fbDB, 'Users', uID);
 
       updateDoc(userDoc, {
         firstName: values.firstName,
@@ -93,8 +93,12 @@ const UserProfile = () => {
         numberPhone: values.numberPhone,
         avatar: values.avatar,
       })
-        .then(() => console.log('Successs'))
+        .then(() => {
+          console.log('Successs');
+        })
         .catch(error => console.log(error));
+
+      await authenticationPresenter.getProfile(uID);
     }
 
     setIsDisableForm(true);
@@ -194,7 +198,14 @@ const UserProfile = () => {
                           ]}
                           valuePropName="moment"
                         >
-                          <DatePicker showTime disabled={isDisableForm} defaultValue={ user?.birthDay ? moment(user?.birthDay, 'DD/MM/YYYY') : moment() } format="DD/MM/YYYY" />
+                          <DatePicker
+                            showTime
+                            disabled={isDisableForm}
+                            defaultValue={
+                              user?.birthDay ? moment(user?.birthDay, 'DD/MM/YYYY') : moment()
+                            }
+                            format="DD/MM/YYYY"
+                          />
                         </Form.Item>
                       </Col>
                       <Col span={11}>

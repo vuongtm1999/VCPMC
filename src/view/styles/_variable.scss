@@ -1,6 +1,6 @@
 // COLOR TEXT
 $color-primary: #FF7506;
-$color-primary-light: #61c6e988;
+$color-primary-light: #FFAC69;
 $color-primary-dark: #46060e;
 
 $color-secondary-dark: #1c1c1e;
@@ -8,13 +8,14 @@ $color-secondary-light: #656568;
 
 //My text
 $color-my-text: #F5F5FF;
+$color-primary-text: $color-primary-light;
 
 //-----------------------------
 //|           My COlor          |
 //-----------------------------
 $my-color-scroll-bar: #347AFF;
 $color-breadcrumb: #F5F5FF;
-$color-icon-breadcrumb: #FFAC69;
+$color-icon-breadcrumb: $color-primary-light;
 
 $color-tertiary-light: #dad2c2;
 $color-tertiary-dark: #ffb119;
@@ -87,7 +88,7 @@ $color-sidebar-menu-item-active: $color-primary;
 //--3. Right Menu
 $color-background-right-menu: #2F2F41;
 $color-right-menu-icon: $color-primary;
-$font-size-icon: 2.2rem;
+$font-size-icon: 3rem;
 
 //--4. Layout
 $color-background-layout: $color-layout;
@@ -115,7 +116,7 @@ $color-table-background: #2F2F41B2;
 $color-table-background-even: $color-primary;
 $color-table-text: $color-white;
 $color-table-border: #727288;
-$color-table-head: #FFAC69;
+$color-table-head: $color-primary-light;
 
 //--4. Form & Modal--
 $color-modal-background: #3E3E5B;

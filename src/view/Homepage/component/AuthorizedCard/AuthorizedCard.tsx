@@ -15,6 +15,7 @@ import '../../style.scss';
 import AuthorizationContractPresenter from '@modules/authorization-contract/presenter';
 import EllipseIcon from '@assets/icon/Ellipse';
 import { Link } from 'react-router-dom';
+import { data } from 'browserslist';
 
 function AuthorizedCard() {
   // const { formatMessage } = useAltaIntl();
@@ -64,18 +65,45 @@ function AuthorizedCard() {
     },
     {
       dataIndex: 'validity',
-      render: (_item: any) =>
-        _item ? (
-          <div className="d-flex align-items-center">
-            <EllipseIcon className="text-primary mr-1" />
-            Còn thời hạn
-          </div>
-        ) : (
-          <div>
-            <EllipseIcon className="text-danger mr-1" />
-            Đã huỷ
-          </div>
-        ),
+      render: (_item: any) => {
+        let data;
+        switch (_item) {
+          case 'new':
+            data = (
+              <div className="d-flex align-items-center">
+                <EllipseIcon className="text-success mr-1" />
+                Mới
+              </div>
+            );
+            break;
+          case 'validity':
+            data = (
+              <div className="d-flex align-items-center">
+                <EllipseIcon className="text-primary mr-1" />
+                Còn thời hạn
+              </div>
+            );
+            break;
+          case 'expires':
+            data = (
+              <div className="d-flex align-items-center">
+                <EllipseIcon className="text-secondary mr-1" />
+                Hết hạn
+              </div>
+            );
+            break;
+          case 'cancel':
+            data = (
+              <div className="d-flex align-items-center">
+                <EllipseIcon className="text-danger mr-1" />
+                Đã huỷ
+              </div>
+            );
+            break;
+        }
+
+        return data;
+      },
     },
     {
       dataIndex: 'date_created',
@@ -86,14 +114,20 @@ function AuthorizedCard() {
     {
       dataIndex: 'none',
       render: (_item: any, record: any) =>
-        record.validity ? (
+        record.validity === 'cancel' ? (
           <div>
-            <Link className='tag-link' to={'/detail-contract'}>Xem chi tiết</Link>
+            <Link className="tag-link" to={`/authorized-contract/${record.id}`}>
+              Xem chi tiết
+            </Link>
+            <span className="tag-link ml-2" onClick={() => setModal({ dataEdit: null, isVisible: true })} >
+              Lý do hủy
+            </span>
           </div>
         ) : (
           <div>
-            <Link className='tag-link' to={'/detail-contract'}>Xem chi tiết</Link>
-            <Link className='tag-link ml-2' to={'/reason-cancel-contract'}>Lý do hủy</Link>
+            <Link className="tag-link" to={`/authorized-contract/${record.id}`}>
+              Xem chi tiết
+            </Link>
           </div>
         ),
     },
@@ -102,7 +136,7 @@ function AuthorizedCard() {
   const dataStringOwnership: ISelect[] = [
     { label: 'common.all', value: undefined },
     { label: 'authorization.table.performer', value: 'Người biểu diễn' },
-    { label: 'authorization.table.producer', value: 'Nhà sản xuất' },
+    { label: 'authorization.table.producer', value: 'Nhà sản xuất' },
   ];
 
   const dataStringValidity: ISelect[] = [
@@ -127,7 +161,7 @@ function AuthorizedCard() {
       setFilterOption((pre: any) => ({ ...pre, [name]: status }));
     }
   };
-  
+
   return (
     <div className="main-card">
       <div className="d-flex flex-row justify-content-md-between mb-3 align-items-end">

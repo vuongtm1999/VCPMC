@@ -12,6 +12,7 @@ interface Props {
   classBreadcrumbs?: string;
   title?: any;
   breadcrumbs?: IRouter | Array<IRouter>;
+  firstBreadCrum?: string;
 }
 
 const MainTitleComponent = ({
@@ -19,6 +20,7 @@ const MainTitleComponent = ({
   classBreadcrumbs = '',
   title = '',
   breadcrumbs,
+  firstBreadCrum,
 }: Props) => {
   let titleIn = '';
   if (title) {
@@ -34,7 +36,7 @@ const MainTitleComponent = ({
   return (
     <div className="main-title-breadcrumb__box">
       {breadcrumbs ? (
-        <BreadcrumbComponent breadcrumbs={breadcrumbs} className={classBreadcrumbs} />
+        <BreadcrumbComponent breadcrumbs={breadcrumbs} className={classBreadcrumbs} firstBreadCrum={firstBreadCrum} />
       ) : (
         ''
       )}

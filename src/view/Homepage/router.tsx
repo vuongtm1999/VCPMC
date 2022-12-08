@@ -3,28 +3,33 @@ import { UilFileGraph } from '@iconscout/react-unicons';
 import React from 'react';
 
 export const routerHomepage: IRouter = {
-  path: '/home-authorized-contract',
+  path: '/contract/authorized',
   loader: import('./index'),
   exact: true,
-  name: 'homepage.manage.contract.authorized', //translate here for breadcrumb and sidebar
+  name: 'homepage.manage.contract', //translate here for breadcrumb and sidebar
   menu: {
     'exact': true,
-    activePath: /home/i,
+    activePath: /contract/i,
     'hideInNavbar': false,
-    content: 'Test',
   },
 };
 
+export const detailAuthContract: IRouter = {
+  path: '/authorized-contract/:contractId',
+  loader: import('./component/DetailAuthContract/index'),
+  exact: true,
+  name: 'homepage.manage.contract.authorized.detail', //translate here for breadcrumb and sidebar
+};
+
 export const routerHomepageExploitation: IRouter = {
-  path: '/home-exploitation-contract',
+  path: '/contract/exploitation',
   loader: import('./ExploitationPage'),
   exact: true,
   name: 'homepage.manage.contract.exploitation', //translate here for breadcrumb and sidebar
   menu: {
     'exact': true,
-    activePath: /home/i,
+    activePath: /contract/i,
     'hideInNavbar': false,
-    content: 'Test',
   },
 };
 
@@ -36,14 +41,14 @@ export const routerHomepageDefault: IRouter = {
 };
 
 export const routerHomepageMain: IRouter = {
-  path: '/home-contract',
+  path: '/contract',
   loader: import('./index'),
   exact: true,
   name: 'homepage.manage', //translate here for breadcrumb and sidebar
   menu: {
     icon: <UilFileGraph size="24" className="icon-feather red-icon" />,
     'exact': true,
-    activePath: /home/i,
+    activePath: /contract/i,
     'hideInNavbar': false,
     content: 'Test',
   },

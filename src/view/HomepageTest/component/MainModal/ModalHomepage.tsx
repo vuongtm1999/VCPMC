@@ -55,7 +55,7 @@ const ModalHomepage = (props: IPropsModal) => {
     form.resetFields();
     handleRefresh();
   };
-  const onFinish = () => {
+  const onFinish = (value:any) => {
     //thêm xóa sửa value here
     // console.debug('value', value);
     if (typeModal === 'EDIT') {

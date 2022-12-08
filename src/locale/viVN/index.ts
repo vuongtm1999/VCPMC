@@ -9,6 +9,7 @@ import pageError from './pageError';
 import roles from './roles';
 import server from './server';
 import table from './table';
+import contract from './contract';
 
 export default {
   ...viVN,
@@ -20,5 +21,6 @@ export default {
   ...homepage,
   ...accounts,
   ...table,
+  ...contract,
   Form,
 };

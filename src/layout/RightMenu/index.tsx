@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 import { IconBack } from '@assets/icon';
 import { CheckPermissionFunc } from '@hoc/CheckPermission';
-import { UilFileCheck, UilFileImport, UilShareAlt, UilTrash } from '@iconscout/react-unicons';
+import { UilFileCheck, UilFileImport, UilShareAlt, UilTrash, UilClipboardNotes } from '@iconscout/react-unicons';
 import { RootState } from '@modules';
 import { useAltaIntl } from '@shared/hook/useTranslate';
 
@@ -30,6 +30,8 @@ const listIconType = {
   eye: <Icon.Eye size="24" className="icon-feather" />,
   eyeOff: <Icon.EyeOff size="24" className="icon-feather" />,
   addSchool: <Icon.FilePlus size="24" className="icon-feather" />,
+  //
+  extend: <UilClipboardNotes size="24" className="icon-feather" />
 };
 export interface IArrayAction {
   icon?: any;

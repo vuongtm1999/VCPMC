@@ -8,6 +8,7 @@ export default {
   'common.action': 'Thao tác',
   'common.save': 'Lưu',
   'common.cancel': 'Hủy',
+  'common.extend': 'Gia hạn',
   'common.home': 'Trang chủ',
   'common.display': 'Hiển thị',
   'common.entries': 'hàng trong mỗi trang',
