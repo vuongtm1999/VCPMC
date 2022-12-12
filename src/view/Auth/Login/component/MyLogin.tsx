@@ -49,6 +49,7 @@ const MyLogin = () => {
             initialValues={{
               remember: false,
             }}
+            // size={'large'}
           >
             <Form.Item
               label={formatMessage('auth.email')}

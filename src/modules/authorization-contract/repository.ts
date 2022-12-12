@@ -1,5 +1,4 @@
-import { getDatas } from 'src/firebase/fbServices/exploitation-contract';
-import { getSingleData, addData, ChangeData } from './../../firebase/fbServices/index';
+import { getSingleData, addData, ChangeData, getDatas } from './../../firebase/fbServices/index';
 import { PaginationEntity } from '@core/pagination/entity';
 
 const collection = 'authorization-contract';

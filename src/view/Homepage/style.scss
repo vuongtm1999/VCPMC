@@ -1,13 +1,10 @@
 @use '../styles/variable' as *;
 
-.homepage {
-
-    
-}
+.homepage {}
 
 .detail-info-contract {
     color: white;
-    
+
     .opacity-80 {
         opacity: 0.8;
     }
@@ -28,4 +25,63 @@ span.tag-link {
 span.tag-link:hover {
     text-decoration: none;
     opacity: 0.6;
+}
+
+.info-modal {
+    max-width: 100%;
+    max-height: 255px;
+    height: 200px;
+    display: table-cell;
+    vertical-align: middle;
+    padding-left: 5%;
+    border: 1px solid #727288;
+    color: white;
+    border-radius: 8px;
+}
+
+#contractForm {
+    .main-form {
+        .ant-input-disabled {
+            background: transparent !important;
+        }
+
+        .ant-form-item:has(.ant-input-disabled),
+        .ant-form-item:has(.ant-picker-disabled),
+        .ant-form-item:has(.ant-picker-disabled) .ant-picker {
+            margin: 0px;
+            max-height: 26px;
+            background-color: transparent !important;
+        }
+        
+        .ant-picker {
+            width: 60%;
+        }
+
+        .ant-form-item-control-input-content {
+            max-width: 75%;
+        }
+
+        .image-upload {
+            width: 20%;
+            height: 20%;
+        }
+
+        .contract-upload-button {
+            padding: 6px;
+            border: 1px solid #FFAC69;
+            color: #FFAC69;
+            border-radius: 8px;
+        }
+
+        .text-form-color {
+            color: #FFAC69;
+        }
+        
+        .ant-divider {
+            border-color: #727288;
+            margin: 10px;
+        }
+
+
+    }
 }

@@ -8,7 +8,7 @@ export default {
   'homepage.tagName': 'Tên',
   'homepage.tagNamed': 'VIE2',
   'homepage.lastUpdate': 'Ngày cập nhật',
-  'homepage.status': 'Tình trạng',
+  'homepage.status': 'Tình trạng',
   'homepage.group': 'Danh xưng',
   'homepage.action': 'Action',
 

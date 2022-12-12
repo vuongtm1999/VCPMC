@@ -8,6 +8,7 @@ import store, { persistor } from 'src/core/store/redux';
 import App from './App';
 
 import { createRoot } from 'react-dom/client';
+import ErrorBoundary from 'antd/lib/alert/ErrorBoundary';
 
 const container = document.getElementById('root');
 const root = createRoot(container!); // createRoot(container!) if you use TypeScript
@@ -15,7 +16,9 @@ root.render(
   <Router>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <App />
+        <ErrorBoundary>
+          <App />
+        </ErrorBoundary>
       </PersistGate>
     </Provider>
   </Router>,

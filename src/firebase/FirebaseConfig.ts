@@ -2,6 +2,7 @@ import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import 'firebase/compat/auth';
+import { getStorage } from 'firebase/storage';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -16,11 +17,13 @@ const firebaseConfig = {
 const fbApp = initializeApp(firebaseConfig);
 const auth = getAuth(fbApp);
 const fbDB = getFirestore(fbApp);
+const fbStorage = getStorage(fbApp);
 
 export default {
   auth,
   fbApp,
   fbDB,
+  fbStorage,
 };
 
 // export class FirebaseConfig {

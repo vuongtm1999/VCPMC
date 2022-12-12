@@ -83,13 +83,14 @@ const UserProfile = () => {
   };
 
   const onUpdateProfile = async (values: any) => {
+    console.log(values.birthDay);
     if (values) {
       const userDoc = doc(FirebaseConfig.fbDB, 'Users', uID);
 
       updateDoc(userDoc, {
         firstName: values.firstName,
         lastName: values.lastName,
-        birthDay: values.birthDay,
+        birthDay: values.birthDay.format('DD/MM/YYYY'),
         numberPhone: values.numberPhone,
         avatar: values.avatar,
       })
@@ -114,11 +115,6 @@ const UserProfile = () => {
 
   return (
     <div>
-      {/* <div className="all-page-component">
-        <div className="w-100 d-flex flex-row-reverse">
-          <HeaderComponent />
-        </div>
-      </div> */}
       <div className="profile-page">
         <MainTitleComponent title="Thông tin cơ bản" />
         {/* <MainTitleComponent breadcrumbs={routerViewProfile} /> */}

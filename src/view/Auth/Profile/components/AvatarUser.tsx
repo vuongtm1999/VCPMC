@@ -74,7 +74,6 @@ const AvatarUser: React.FC<IAvatar> = props => {
             disabled={disabled}
             type="file"
             id="input-media"
-            accept="image/png, image/jpeg, image/jpg"
           /> */}
         </div>
       )}

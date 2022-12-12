@@ -6,11 +6,17 @@ import ButtonForm from '@shared/components/ButtonForm';
 import { useAltaIntl } from '@shared/hook/useTranslate';
 
 import { IPropsModal } from '../../../interface';
+import { useSingleAsync } from '@shared/hook/useAsync';
+import AuthorizationContractPresenter from '@modules/authorization-contract/presenter';
 
-const DetailAuthModal = (props: IPropsModal) => {
-  const { modal, setModal, handleRefresh } = props;
+const DetailAuthModal = props => {
+  const { modal, setModal, handleRefresh, contractId, contractData } = props;
   const [form] = Form.useForm();
   const { formatMessage, intl } = useAltaIntl();
+  const { changeAuthorizationContract } = AuthorizationContractPresenter;
+  const changeAuthorizationContractById = useSingleAsync(changeAuthorizationContract);
+  
+  // console.log(contractData);
 
   const [typeModal, setTypeModal] = useState<'EDIT' | 'ADD'>('ADD');
   // JUST FORM
@@ -44,7 +50,19 @@ const DetailAuthModal = (props: IPropsModal) => {
   };
   const onFinish = (values: any) => {
     //thêm xóa sửa value here
-    console.log('value', values);
+    console.log('contractData', contractData);
+
+    values = { ...values, ...contractData, validity: 'cancel' };
+
+    changeAuthorizationContractById
+      .execute(contractId, values)
+      .then(response => {
+        console.log('OK: ', response);
+      })
+      .catch(() => {
+        console.log('Đã có lỗi sảy ra');
+      });
+
     if (typeModal === 'EDIT') {
       //call api
       handleCancel();
@@ -66,13 +84,13 @@ const DetailAuthModal = (props: IPropsModal) => {
             : formatMessage(`${translateFirstKey}.update`)
           : formatMessage(`${translateFirstKey}.contract.cancel`)
       }
-      visible={modal.isVisible}
+      open={modal.isVisible}
       onOk={handleOk}
       onCancel={handleCancel}
       footer={
         <ButtonForm
           isDisabled={modal.isReadOnly ? true : false}
-          formName="form-device"
+          formName="contract-cancel"
           nameButtonSubmit={typeModal === 'EDIT' ? 'common.update' : 'common.add'}
           onCancelForm={() => handleCancel()}
         />
@@ -83,11 +101,14 @@ const DetailAuthModal = (props: IPropsModal) => {
         form={form}
         className="main-form" //important
         layout="vertical" //important
-        name="basic"
+        name="contract-cancel"
         onFinish={onFinish}
       >
         <Form.Item name="reason">
-          <Input.TextArea placeholder='Cho chúng tôi biết lý do bạn muốn huỷ hợp đồng uỷ quyền này...' rows={8} />
+          <Input.TextArea
+            placeholder="Cho chúng tôi biết lý do bạn muốn huỷ hợp đồng uỷ quyền này..."
+            rows={8}
+          />
         </Form.Item>
         {/* {renderForm(formContent, intl)} */}
         {modal?.dataEdit && (

@@ -7,7 +7,6 @@ import useTable from '@shared/components/TableComponent/hook';
 import { IModal } from '@view/Homepage/interface';
 // import { useAltaIntl } from '@shared/hook/useTranslate';
 import RightMenu, { IArrayAction } from '@layout/RightMenu';
-import ModalComponents from '../MainModal/ModalHomepage';
 import ISelect from '@core/select';
 import SearchComponent from '@shared/components/SearchComponent';
 import TableComponent from '@shared/components/TableComponent';
@@ -16,6 +15,7 @@ import AuthorizationContractPresenter from '@modules/authorization-contract/pres
 import EllipseIcon from '@assets/icon/Ellipse';
 import { Link } from 'react-router-dom';
 import { data } from 'browserslist';
+import ModalAuthorizedCard from './ModalAuthorizedCard';
 
 function AuthorizedCard() {
   // const { formatMessage } = useAltaIntl();
@@ -27,7 +27,7 @@ function AuthorizedCard() {
   const [modal, setModal] = useState<IModal>({
     isVisible: false,
     dataEdit: null,
-    isReadOnly: false,
+    isReadOnly: true,
   });
 
   const handleRefresh = () => {
@@ -134,13 +134,13 @@ function AuthorizedCard() {
   ];
 
   const dataStringOwnership: ISelect[] = [
-    { label: 'common.all', value: undefined },
+    { label: 'common.all', value: 'all' },
     { label: 'authorization.table.performer', value: 'Người biểu diễn' },
     { label: 'authorization.table.producer', value: 'Nhà sản xuất' },
   ];
 
   const dataStringValidity: ISelect[] = [
-    { label: 'common.all', value: undefined },
+    { label: 'common.all', value: 'all' },
     { label: 'Mới', value: 'new' },
     { label: 'Còn thời hạn', value: 'validity' },
     { label: 'Hết hạn', value: 'expires' },
@@ -199,7 +199,7 @@ function AuthorizedCard() {
 
       <RightMenu arrayAction={arrayAction} />
 
-      <ModalComponents modal={modal} handleRefresh={handleRefresh} setModal={setModal} />
+      <ModalAuthorizedCard modal={modal} handleRefresh={handleRefresh} setModal={setModal} />
     </div>
   );
 }
