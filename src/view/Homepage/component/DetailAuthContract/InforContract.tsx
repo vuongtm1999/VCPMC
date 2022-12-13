@@ -51,7 +51,12 @@ function InforContract(props) {
         setIsFormDisabled(!isFormDisabled);
       },
     },
-    { iconType: 'extend' },
+    {
+      iconType: 'extend',
+      handleAction: () => {
+        setModal({ dataEdit: detailData, isVisible: true });
+      },
+    },
     {
       iconType: 'cancel',
       handleAction: () => {
@@ -228,7 +233,7 @@ function InforContract(props) {
                 <Row align={'middle'}>
                   <Col span={24}>
                     <label htmlFor="input-media" className="text-white">
-                      Đính kèm tệp:{' '}
+                      Đính kèm tệp:
                       <span className="ml-2 contract-upload-button">
                         <UilCloudUpload /> Tải lên
                       </span>
@@ -277,19 +282,19 @@ function InforContract(props) {
                 </Row>
                 <Row className="text-white" align={'middle'}>
                   <Col span={12}>Quyền tác giả:</Col>
-                  <Col span={12}>0%</Col>
+                  <Col span={12}>{detailData.copyright}</Col>
                 </Row>
                 <Row className="text-white">Quyền liên quan:</Row>
                 <Row className="text-white opacity-80" align={'middle'}>
                   <Col span={12}>Quyền của người biểu diễn:</Col>
-                  <Col span={12}>50%</Col>
+                  <Col span={12}>{detailData.RightOfPerformer}</Col>
                 </Row>
                 <Row className="text-white opacity-80" align={'middle'}>
                   <Col span={12}>
                     <Col span={24}>Quyền của nhà sản xuất:</Col>
                     <Col span={24}>(Bản ghi/video)</Col>
                   </Col>
-                  <Col span={12}>50%</Col>
+                  <Col span={12}>{detailData.RightOfProducer}</Col>
                 </Row>
               </Col>
             </Row>

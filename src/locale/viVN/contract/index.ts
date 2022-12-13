@@ -1,6 +1,12 @@
 export default {
     'auth.contract.cancel': 'Hủy hợp đồng uỷ quyền',
     'auth.contract.cancel.information': 'Lý do hủy hợp đồng uỷ quyền',
+    'auth.contract.extend': 'Gia hạn uỷ quyền tác phẩm',
+    'auth.contract.extend.time': 'Thời gian gia hạn',
+    'auth.contract.extend.time.from': 'Từ ngày:',
+    'auth.contract.extend.time.to': 'Đến ngày:',
+
+
 
     'modal.close': 'Đóng',
     'contract.detail.number': 'Số hợp đồng',

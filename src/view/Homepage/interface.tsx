@@ -4,6 +4,7 @@ export interface IModal {
   isVisible: boolean;
   dataEdit: any;
   isReadOnly?: boolean;
+  data?: object;
 }
 
 export interface IPropsModal {

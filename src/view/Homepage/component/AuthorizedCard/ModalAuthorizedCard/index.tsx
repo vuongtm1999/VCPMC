@@ -50,7 +50,7 @@ const ModalAuthorizedCard = (props: IPropsModal) => {
     form.submit();
   };
   const handleCancel = () => {
-    setModal({ isVisible: false, dataEdit: null });
+    setModal({ isVisible: false, dataEdit: null, isReadOnly: true });
     // form.resetFields();
     // handleRefresh();
   };
@@ -68,14 +68,16 @@ const ModalAuthorizedCard = (props: IPropsModal) => {
 
   const translateFirstKey = 'auth.contract.cancel'; //put your translate here
 
+  console.log(modal.isReadOnly);
+
   return (
     <Modal
       className="main-modal"
       title={
         typeModal === 'EDIT'
           ? modal.isReadOnly
-            ? formatMessage(`${translateFirstKey}.update`)
-            : formatMessage(`${translateFirstKey}.information`)
+            ? formatMessage(`${translateFirstKey}.information`)
+            : formatMessage(`${translateFirstKey}.update`)
           : formatMessage(`${translateFirstKey}.create`) + 'test'
       }
       open={modal.isVisible}
@@ -88,7 +90,7 @@ const ModalAuthorizedCard = (props: IPropsModal) => {
       }
       closable={false}
     >
-      <div className='info-modal'>Hủy hợp đồng để tạo hợp đồng mới với giá trị và thời hạn lâu hơn.sssssssssssssssssssssssssssssssafa sadfa àdasf</div>
+      { modal.isReadOnly && <div className='info-modal'>{modal.data}</div> }
     </Modal>
   );
 };

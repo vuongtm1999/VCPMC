@@ -28,6 +28,7 @@ function AuthorizedCard() {
     isVisible: false,
     dataEdit: null,
     isReadOnly: true,
+    data: undefined,
   });
 
   const handleRefresh = () => {
@@ -119,7 +120,7 @@ function AuthorizedCard() {
             <Link className="tag-link" to={`/authorized-contract/${record.id}`}>
               Xem chi tiết
             </Link>
-            <span className="tag-link ml-2" onClick={() => setModal({ dataEdit: null, isVisible: true })} >
+            <span className="tag-link ml-2" onClick={() => setModal({ data: record.reason, dataEdit: null, isVisible: true, isReadOnly: true })} >
               Lý do hủy
             </span>
           </div>

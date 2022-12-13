@@ -8,6 +8,10 @@ import { useAltaIntl } from '@shared/hook/useTranslate';
 import { IPropsModal } from '../../../interface';
 import { useSingleAsync } from '@shared/hook/useAsync';
 import AuthorizationContractPresenter from '@modules/authorization-contract/presenter';
+import { Col, Row } from 'antd/lib/grid';
+import DatePicker from 'antd/lib/date-picker';
+import moment from 'moment';
+import '../../../style.scss';
 
 const DetailAuthModal = props => {
   const { modal, setModal, handleRefresh, contractId, contractData } = props;
@@ -15,7 +19,7 @@ const DetailAuthModal = props => {
   const { formatMessage, intl } = useAltaIntl();
   const { changeAuthorizationContract } = AuthorizationContractPresenter;
   const changeAuthorizationContractById = useSingleAsync(changeAuthorizationContract);
-  
+
   // console.log(contractData);
 
   const [typeModal, setTypeModal] = useState<'EDIT' | 'ADD'>('ADD');
@@ -81,7 +85,7 @@ const DetailAuthModal = props => {
         typeModal === 'EDIT'
           ? modal.isReadOnly
             ? formatMessage(`${translateFirstKey}.information`)
-            : formatMessage(`${translateFirstKey}.update`)
+            : formatMessage(`${translateFirstKey}.contract.extend`)
           : formatMessage(`${translateFirstKey}.contract.cancel`)
       }
       open={modal.isVisible}
@@ -100,24 +104,93 @@ const DetailAuthModal = props => {
       <Form
         form={form}
         className="main-form" //important
-        layout="vertical" //important
+        layout="horizontal" //important
         name="contract-cancel"
         onFinish={onFinish}
       >
-        <Form.Item name="reason">
-          <Input.TextArea
-            placeholder="Cho chúng tôi biết lý do bạn muốn huỷ hợp đồng uỷ quyền này..."
-            rows={8}
-          />
-        </Form.Item>
+        {modal?.dataEdit === null && (
+          <Form.Item name="reason">
+            <Input.TextArea
+              placeholder="Cho chúng tôi biết lý do bạn muốn huỷ hợp đồng uỷ quyền này..."
+              rows={8}
+            />
+          </Form.Item>
+        )}
         {/* {renderForm(formContent, intl)} */}
         {modal?.dataEdit && (
-          <Form.Item
-            label={formatMessage(`${translateFirstKey}.accountStatus`)}
-            name={'accountStatus'}
-          >
-            <Checkbox>{formatMessage('common.statusActive')}</Checkbox>
-          </Form.Item>
+          <Row gutter={[48, 0]}>
+            <Col span={12}>
+              <h3 className="text-white">
+                Thời gian gia hạn <span className="text-danger">*</span>
+              </h3>
+              <div className="text-white">
+                <span className="text-white m-0">
+                  {formatMessage(`${translateFirstKey}.contract.extend.time.from`)}
+                </span>
+                <span className="ml-2">
+                  {moment(contractData.effective_date, 'DD/MM/YYYY', true)
+                    .add(1, 'day')
+                    .format('DD/MM/YYYY')}
+                </span>
+              </div>
+              <Form.Item
+                label={formatMessage(`${translateFirstKey}.contract.extend.time.to`)}
+                name={'expire_date'}
+                rules={[
+                  {
+                    required: true,
+                  },
+                ]}
+                valuePropName="moment"
+              >
+                <DatePicker
+                  showTime
+                  defaultValue={
+                    contractData.expire_date
+                      ? moment(contractData.expire_date, 'DD/MM/YYYY')
+                      : moment()
+                  }
+                  format="DD/MM/YYYY"
+                />
+              </Form.Item>
+
+              <div className='text-white opacity-70'>
+                Lưu ý: Thời gian bắt đầu gia hạn hợp đồng mới được tính sau ngày hết hạn hợp đồng cũ
+                một ngày.
+              </div>
+            </Col>
+            <Col span={12}>
+              <h3 className="text-white">
+                Mức nhuận bút <span className="text-danger">*</span>
+              </h3>
+              <div className="text-white">
+                <span className="text-white m-0">
+                  {formatMessage(`${translateFirstKey}.contract.extend.time.from`)}
+                </span>
+                <span className="ml-2">{}</span>
+              </div>
+              <Form.Item
+                label={formatMessage(`${translateFirstKey}.contract.extend.time.to`)}
+                name={'expire_date'}
+                rules={[
+                  {
+                    required: true,
+                  },
+                ]}
+                valuePropName="moment"
+              >
+                <DatePicker
+                  showTime
+                  defaultValue={
+                    contractData.expire_date
+                      ? moment(contractData.expire_date, 'DD/MM/YYYY')
+                      : moment()
+                  }
+                  format="DD/MM/YYYY"
+                />
+              </Form.Item>
+            </Col>
+          </Row>
         )}
       </Form>
     </Modal>
