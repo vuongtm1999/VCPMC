@@ -20,6 +20,7 @@ export default {
   'common.add': 'Thêm',
   'common.addSchool': 'Đăng ký trường',
   'common.edit': 'Sửa',
+  'common.mange.approve': 'Quản lý phê duyệt',
   'common.all': 'Tất cả',
   'common.keyword': 'Từ khóa',
   'common.statusDeactive': 'Dừng hoạt động',

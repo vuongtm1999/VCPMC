@@ -1,0 +1,36 @@
+@use '../styles/variable' as *;
+
+.recordpage {}
+
+.layout {
+    .active-mode .menu-item svg {
+        color: #FF7506 !important;
+    }
+
+    .play-list-icon {
+        color: #AEAEAE;
+    }
+
+    .list-icon {
+        color: #AEAEAE;
+        width: 32px;
+        height: 32px;
+    }
+
+    .menu-item {
+        width: fit-content;
+        height: fit-content;
+        display: inline-block;
+    }
+    
+    .menu-item:hover {
+        opacity: 0.9;
+    }
+
+}
+
+
+.right {
+    width: min-content;
+    min-width: 10rem;
+}

@@ -10,6 +10,7 @@ import roles from './roles';
 import server from './server';
 import table from './table';
 import contract from './contract';
+import record from './record';
 
 export default {
   ...viVN,
@@ -22,5 +23,6 @@ export default {
   ...accounts,
   ...table,
   ...contract,
+  ...record,
   Form,
 };

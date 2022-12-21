@@ -4,7 +4,7 @@ import { CameraOutlined } from '@ant-design/icons';
 import { imgAvatar } from '@shared/assets/images';
 import { useSelector } from 'react-redux';
 import { UserSelector } from '@modules/authentication/profileStore';
-import UploadWidget from '@view/ToolFireBase/CloundynaryWidget';
+import UploadWidget from '@view/Tool/CloundynaryWidget';
 interface IAvatar {
   disabled?: boolean;
   chooseFile: (file: any) => void;

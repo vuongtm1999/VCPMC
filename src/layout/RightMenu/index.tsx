@@ -82,6 +82,7 @@ const RenderItem = React.memo(({ item }: { item: IArrayAction }) => {
 interface IPropsRightMenu {
   arrayAction?: Array<IArrayAction>;
 }
+
 const RightMenu = (props: IPropsRightMenu) => {
   const { arrayAction } = props;
 

@@ -1,6 +1,11 @@
 @use '../styles/variable' as *;
 
-.homepage {}
+.homepage {
+}
+
+.table-function {
+    text-align: left;
+}
 
 .detail-info-contract {
     color: white;
@@ -39,11 +44,18 @@ span.tag-link:hover {
     .opacity-70 {
         opacity: 0.7;
     }
+
+    .contract-upload-button {
+        padding: 6px;
+        border: 1px solid #FFAC69;
+        color: #FFAC69;
+        border-radius: 8px;
+    }
 }
 
 .info-modal {
     max-width: 100%;
-    width: 446px;
+    width: 700px;
     max-height: 255px;
     height: 200px;
     display: table-cell;

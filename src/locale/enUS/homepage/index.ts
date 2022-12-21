@@ -4,4 +4,5 @@ export default {
   'homepage.lastUpdate': 'test',
   'homepage.group': 'test',
   'homepage.action': 'test',
+  'homepage.id': 'STT'
 };

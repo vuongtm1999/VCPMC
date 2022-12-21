@@ -13,7 +13,7 @@ import TableComponent from '@shared/components/TableComponent';
 import '../../style.scss';
 import AuthorizationContractPresenter from '@modules/authorization-contract/presenter';
 import EllipseIcon from '@assets/icon/Ellipse';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { data } from 'browserslist';
 import ModalAuthorizedCard from './ModalAuthorizedCard';
 
@@ -21,6 +21,7 @@ function AuthorizedCard() {
   // const { formatMessage } = useAltaIntl();
   const [search, setSearch] = useState<string>('');
   const [filter, setFilterOption] = useState<any>();
+  const navigate = useNavigate();
 
   const table = useTable();
 
@@ -39,7 +40,7 @@ function AuthorizedCard() {
     {
       iconType: 'add',
       handleAction: () => {
-        setModal({ dataEdit: null, isVisible: true });
+        navigate('/contract/authorized/add');
       },
     },
   ];

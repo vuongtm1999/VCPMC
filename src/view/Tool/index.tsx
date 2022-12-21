@@ -15,16 +15,16 @@ const Toolpage = () => {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
-  const rndInt = randomIntFromInterval(1, 9999);
+  const rndInt = randomIntFromInterval(1000, 9999);
 
   const validity =
     randomNumber < 25
       ? 'Mới'
       : randomNumber > 25 && randomNumber < 50
-      ? 'Còn thời hạn'
+      ? 'Đã phê duyệt'
       : randomNumber > 50 && randomNumber < 75
-      ? 'Đã hết hạn'
-      : 'Đã huỷ';
+      ? 'Bị từ chối'
+      : 'Đã phê duyệt';
 
   const ownership =
     randomNumber < 50
@@ -35,14 +35,14 @@ const Toolpage = () => {
 
   const addData = async () => {
     try {
-      const docRef = await addDoc(collection(FirebaseConfig.fbDB, 'exploitation-contract'), {
+      const docRef = await addDoc(collection(FirebaseConfig.fbDB, 'authorized_works'), {
         id: id,
-        number: 'HD' + rndInt,
-        client: 'Hợp đồng kinh doanh ' + id,
-        date_created: '01/04/2021 15:53:13',
-        effective_date: '01/04/2021 15:53:13',
-        expiration_date: '02/12/2022',
-        validity: validity,
+        name: 'Gorgeous Wooden Bike',
+        code: 'VNA ' + rndInt,
+        singer: 'Vương Anh Tú',
+        author: 'Vương Phong',
+        date_created: '01/12/2020 15:53:13',
+        status: validity,
       });
 
       setId(prev => prev + 1);
@@ -92,7 +92,7 @@ const Toolpage = () => {
     {
       label: 'Tool 2',
       key: '2',
-      children: <div className="text-light">{tagTwo}</div>,
+      children: <div className="text-dark">{tagTwo}</div>,
     },
   ];
 

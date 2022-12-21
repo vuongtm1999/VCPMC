@@ -40,8 +40,6 @@ function InforContract(props) {
 
   useEffect(() => {}, [detailData]);
 
-  // console.log(detailData);
-
   const handleRefresh = () => {};
 
   const arrayAction: IArrayAction[] = [

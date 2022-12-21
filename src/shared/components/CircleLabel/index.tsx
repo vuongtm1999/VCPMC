@@ -15,7 +15,7 @@ const CircleLabel = ({ text, colorCode = 'blue', className }: IProps) => {
   return (
     <div className={` circle-label ${className}`}>
       <span className={`circle-status ${color[colorCode]}`}></span>
-      <span>{text}</span>
+      <span className='text-white'>{text}</span>
     </div>
   );
 };

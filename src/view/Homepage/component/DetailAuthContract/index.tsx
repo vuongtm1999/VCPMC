@@ -14,6 +14,7 @@ import InfoIcon from '@assets/icon/InfoIcon';
 import TabComponent from '@shared/components/TabsComponent';
 import InforContract from './InforContract';
 import lodash from 'lodash';
+import InfoWork from './InfoWork';
 
 function DetailAuthContract() {
   const { contractId } = useParams();
@@ -70,7 +71,7 @@ function DetailAuthContract() {
     {
       label: 'Tác phẩm uỷ quyền',
       key: '2',
-      children: <span>tab2</span>,
+      children: <InfoWork />,
     },
   ];
 

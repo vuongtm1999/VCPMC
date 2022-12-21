@@ -5,6 +5,13 @@ export default {
     'auth.contract.extend.time': 'Thời gian gia hạn',
     'auth.contract.extend.time.from': 'Từ ngày:',
     'auth.contract.extend.time.to': 'Đến ngày:',
+    'works.name':'Tên bản ghi',
+    'works.code':'Mã ISRC',
+    'works.singer':'Ca sĩ',
+    'works.author':'Tác giả',
+    'works.date_created':'Ngày tải',
+    'works.status':'Tình trạng',
+    'works.audio': ' ',
 
 
 

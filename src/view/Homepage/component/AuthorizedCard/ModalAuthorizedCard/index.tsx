@@ -13,6 +13,7 @@ const ModalAuthorizedCard = (props: IPropsModal) => {
   const { formatMessage, intl } = useAltaIntl();
 
   const [typeModal, setTypeModal] = useState<'EDIT' | 'ADD'>('EDIT');
+  
   // JUST FORM
   const formContent: IFormContent[] = React.useMemo<IFormContent[]>(() => {
     return [
