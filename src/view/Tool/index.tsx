@@ -15,7 +15,7 @@ const Toolpage = () => {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
-  const rndInt = randomIntFromInterval(1000, 9999);
+  const rndInt = randomIntFromInterval(40000, 99999);
 
   const validity =
     randomNumber < 25
@@ -26,23 +26,28 @@ const Toolpage = () => {
       ? 'Bị từ chối'
       : 'Đã phê duyệt';
 
-  const ownership =
+  const status =
     randomNumber < 50
-      ? 'Người biểu diễn'
-      : randomNumber > 50 && randomNumber < 75
-      ? 'Nhà sản xuất'
-      : 'Người biểu diễn \n Nhà sản xuất';
+      ? 'Còn thời hạn'
+      : 'Đã hết hạn'
+
+  const expiration_date = status ? '25/11/2021' : '07/03/2019'
+
 
   const addData = async () => {
     try {
-      const docRef = await addDoc(collection(FirebaseConfig.fbDB, 'authorized_works'), {
+      const docRef = await addDoc(collection(FirebaseConfig.fbDB, 'record'), {
         id: id,
         name: 'Gorgeous Wooden Bike',
-        code: 'VNA ' + rndInt,
-        singer: 'Vương Anh Tú',
-        author: 'Vương Phong',
-        date_created: '01/12/2020 15:53:13',
-        status: validity,
+        code: 'KRA' + rndInt,
+        name_record: 'Sleek Granite Ball',
+        time: '03:00',
+        singer: 'Lisa',
+        author: 'Lisa',
+        category: 'Ballad',
+        format: 'audio',
+        status: status,
+        expiration_date: expiration_date
       });
 
       setId(prev => prev + 1);

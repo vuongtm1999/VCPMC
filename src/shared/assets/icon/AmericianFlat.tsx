@@ -20,7 +20,7 @@ const americianSvg = () => (
       <circle
         fill="none"
         stroke="#000000"
-        stroke-width="8"
+        strokeWidth="8"
         stroke-miterlimit="10"
         cx="827"
         cy="827"

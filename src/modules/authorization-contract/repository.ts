@@ -4,6 +4,9 @@ import { PaginationEntity } from '@core/pagination/entity';
 const collection = 'authorization-contract';
 
 const getAuthorizationContracts = (paging: any, option: any): Promise<{ data: Array<any>; info: PaginationEntity }> => {
+  console.log('paging: ', paging);
+  console.log('option: ', option);
+
   return getDatas(paging, option, collection);
 };
 

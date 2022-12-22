@@ -3,33 +3,17 @@ import SelectAndLabelComponent, {
   ISelectAndLabel,
 } from '@shared/components/SelectAndLabelComponent';
 import { NavLink } from 'react-router-dom';
-import React from 'react';
+import React, { useState } from 'react';
 import ISelect from '@core/select';
 import { UilListUl } from '@iconscout/react-unicons';
 import DisplayCardModeIcon from '@assets/icon/DisplayCardMode';
 
 function Layout({ children }) {
-  const handleSearch = (searchKey: string) => {
-    // setSearch(searchKey);
-  };
+  const [search, setSearch] = useState<string>('');
+  const [filter, setFilterOption] = useState<any>();
 
-  const dataString: ISelect[] = [
-    { label: 'common.all', value: undefined },
-    { label: 'tddddadsasesssssssssst', value: 'test' },
-  ];
 
-  const arraySelectFilter: ISelectAndLabel[] = [
-    { textLabel: 'common.keyword', dataString },
-    { textLabel: 'common.keyword', dataString },
-    { textLabel: 'common.keyword', dataString },
-    { textLabel: 'common.keyword', dataString },
-  ];
 
-  const onChangeSelectStatus = (name: string | undefined) => (status: any) => {
-    // if (name && status) {
-    //   setFilterOption((pre: any) => ({ ...pre, [name]: status }));
-    // }
-  };
 
   return (
     <div className='layout'>

@@ -40,7 +40,7 @@ export const getDatas = async (paging: any, option: any, collectionName: any): P
         })
     }
 
-    console.log(customdata, option);
+    console.log('data', customdata, option);
 
     return { data: customdata, info: { total: customdata.length } };
 };
