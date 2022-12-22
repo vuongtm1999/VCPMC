@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import CircleLabel from '@shared/components/CircleLabel';
 import EditIconComponent from '@shared/components/EditIconComponent';
 import InformationIconComponent from '@shared/components/InformationIcon';
@@ -18,12 +18,17 @@ import { UilListUl } from '@iconscout/react-unicons';
 import SearchComponent from '@shared/components/SearchComponent';
 import SelectAndLabelComponent, { ISelectAndLabel } from '@shared/components/SelectAndLabelComponent';
 import ISelect from '@core/select';
+import Modal from 'antd/lib/modal';
+import { Player } from "video-react";
+import "node_modules/video-react/dist/video-react.css"; 
 
 const dataTable = require('../data.json');
 
 function TableMode() {
   const { formatMessage } = useAltaIntl();
   const table = useTable();
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const ref = useRef();
 
   const [modal, setModal] = useState<IModal>({
     isVisible: false,
@@ -94,7 +99,7 @@ function TableMode() {
     },
     {
       dataIndex: 'none',
-      render: () => <span className="tag-link">Nghe</span>,
+      render: () => <span onClick={()=>{setIsOpen(true)}} className="tag-link">Nghe</span>,
     },
   ];
 
@@ -111,6 +116,14 @@ function TableMode() {
       setFilterOption((pre: any) => ({ ...pre, [name]: status }));
     }
   };
+
+  const hideModal = () => {
+    setIsOpen(false);
+   }
+
+   const pause = () => {
+    ref.current.pause();
+   }
 
   return (
     <div className="table-record">
@@ -178,6 +191,26 @@ function TableMode() {
           </div>
         </div>
       </div>
+
+      <Modal
+          title="Video music"
+          open={isOpen}
+          footer={null}
+          onCancel={hideModal}
+          afterClose={pause}
+          bodyStyle={{ padding: 0 }}
+        >
+          <Player
+          playsInline
+            autoPlay
+            ref={ref}
+          >
+            <source
+              src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4"
+              type="video/mp4"
+            />
+          </Player>
+        </Modal>
     </div>
   );
 }
